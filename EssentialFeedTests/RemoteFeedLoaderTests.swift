@@ -51,7 +51,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
     }
 }
 
-//MARK: -  Helpers
+//MARK: - Helpers
 private extension RemoteFeedLoaderTests {
     private func makeSut(url: URL = URL(string: "https://a-url.com")!) -> (RemoteFeedLoader, HttpClientSpy) {
         let clientSpy = HttpClientSpy()
