@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct FeedItem {
+public struct FeedItem: Codable {
     let id: UUID
     let imageURL: URL
     let description: String?
