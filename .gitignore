@@ -1,3 +1,5 @@
 
 *.xcscheme
 
+*.xcuserstate
+.DS_Store
