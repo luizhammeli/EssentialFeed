@@ -7,9 +7,13 @@
 
 import Foundation
 
-public struct FeedItem: Codable {
+public struct FeedItem: Equatable, Codable {
     let id: UUID
     let imageURL: URL
     let description: String?
     let location: String?
+}
+
+public struct RootFeed: Equatable, Codable {
+    let items: [FeedItem]
 }
