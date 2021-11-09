@@ -36,8 +36,6 @@ public final class RemoteFeedLoader {
                 completion(.failure(Error.connectivity))
             }
         }
-    }
-    
-    
+    }        
 }
 
