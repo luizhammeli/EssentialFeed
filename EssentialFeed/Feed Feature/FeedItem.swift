@@ -7,13 +7,16 @@
 
 import Foundation
 
-public struct FeedItem: Equatable, Codable {
+public struct FeedItem: Equatable, Decodable {
     let id: UUID
     let imageURL: URL
     let description: String?
     let location: String?
-}
-
-public struct RootFeed: Equatable, Codable {
-    let items: [FeedItem]
+    
+    public init(id: UUID, imageURL: URL, description: String?, location: String?) {
+        self.id = id
+        self.imageURL = imageURL
+        self.description = description
+        self.location = location
+    }
 }

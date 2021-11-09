@@ -46,7 +46,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
         samples.enumerated().forEach { index, code in
             let (feedLoader, clientSpy) = makeSut()
             expect(sut: feedLoader, toCompleteWith: .failure(.invalid)) {
-                clientSpy.complete(with: code)
+                clientSpy.complete(with: code, data: makeFeedJson(items: []))
             }
         }
     }
@@ -58,17 +58,21 @@ final class RemoteFeedLoaderTests: XCTestCase {
         }
     }
     
-    func test_load_deliversErrorOn200HttpResponseWithEmptyData() {
+    func test_load_deliversNoItemsOn200HttpResponseWithValidData() {
         let (feedLoader, clientSpy) = makeSut()
         expect(sut: feedLoader, toCompleteWith: .success([])) {
-            clientSpy.complete(with: 200, data: Data("{ \"items\": [] }".description.utf8))
+            clientSpy.complete(with: 200, data: makeFeedJson(items: []))
         }
     }
     
     func test_load_deliversItemsOn200HttpResponseWithValidData() {
         let (feedLoader, clientSpy) = makeSut()
-        expect(sut: feedLoader, toCompleteWith: .success([])) {
-            clientSpy.complete(with: 200, data: Data("{ \"items\": [] }".description.utf8))
+        let feedItem1 = makeFeedItem(id: UUID(), imageURL: makeURL(), description: nil, location: nil)
+        let feedItem2 = makeFeedItem(id: UUID(), imageURL: makeURL(), description: "Test Description", location: "Test Location")
+        let jsonData = makeFeedJson(items: [feedItem1.1, feedItem2.1])
+
+        expect(sut: feedLoader, toCompleteWith: .success([feedItem1.0, feedItem2.0])) {
+            clientSpy.complete(with: 200, data: jsonData)
         }
     }
 }
@@ -87,6 +91,23 @@ private extension RemoteFeedLoaderTests {
         action()
         
         XCTAssertEqual(capturedErrors, [result], file: file, line: line)
+    }
+    
+    private func makeFeedItem(id: UUID, imageURL: URL, description: String? = nil, location: String? = nil) -> (FeedItem, [String: Any]){
+        let feedItem = FeedItem(id: id, imageURL: imageURL, description: description, location: location)
+        let feedItemJson = ["id": id.uuidString, "image": imageURL.description, "location": location, "description": description].reduce(into: [String: Any]()) { partialResult, item in
+            if let value = item.value { partialResult[item.key] = value }
+        }
+        return (feedItem, feedItemJson)
+    }
+    
+    private func makeFeedJson(items: [[String: Any]]) -> Data {
+        let json = ["items": items]
+        return try! JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed)
+    }
+    
+    private func makeURL() -> URL {
+        return URL(string: "https://a-url.com")!
     }
 }
 
