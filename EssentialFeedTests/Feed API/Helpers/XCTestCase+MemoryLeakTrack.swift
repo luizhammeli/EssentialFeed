@@ -9,9 +9,9 @@ import Foundation
 import XCTest
 
 extension XCTestCase {
-    func checkForMemoryLeaks(instance: AnyObject) {
+    func checkForMemoryLeaks(instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
         addTeardownBlock { [weak instance] in
-            XCTAssertNil(instance)
+            XCTAssertNil(instance, file: file, line: line)
         }
     }
 }
