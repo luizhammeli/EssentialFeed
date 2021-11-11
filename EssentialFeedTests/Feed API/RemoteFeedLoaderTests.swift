@@ -130,17 +130,7 @@ private extension RemoteFeedLoaderTests {
         let json = ["items": items]
         return try! JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed)
     }
-    
-    private func makeURL() -> URL {
-        return URL(string: "https://a-url.com")!
-    }
-    
-    private func checkForMemoryLeaks(instance: AnyObject) {
-        addTeardownBlock { [weak instance] in
-            XCTAssertNil(instance)
-        }
-    }
-    
+
     private func failure(_ error: RemoteFeedLoader.Error) -> LoadFeedResult {
         return .failure(error)
     }
