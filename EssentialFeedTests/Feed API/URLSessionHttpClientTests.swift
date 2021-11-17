@@ -11,7 +11,7 @@ import EssentialFeed
 
 private struct Stub {
     let error: Error?
-    let response: HTTPURLResponse?
+    let response: URLResponse?
     let data: Data?
 }
 
@@ -30,7 +30,7 @@ final class URLSessionHttpClient: HttpClient {
                 return
             }
             
-            guard let response = response as? HTTPURLResponse, let data = data else {
+            guard let response = response as? HTTPURLResponse, let data = data, !data.isEmpty else {
                 completion(.failure(NSError(domain: "", code: 1, userInfo: nil)))
                 return
             }
@@ -52,30 +52,32 @@ final class URLSessionHttpClientTests: XCTestCase {
     func test_get_shouldRequestWithCorrectUrl() {
         let url = makeURL()
         let sut = makeSut()
-        
+
         let exp = expectation(description: "waiting")
         URLProtocolStub.observeRequest { request in
             XCTAssertEqual(request.url, url)
             XCTAssertEqual(request.httpMethod, "GET")
             exp.fulfill()
         }
-        
+
         sut.get(from: url) { _ in }
         wait(for: [exp], timeout: 1)
     }
     
     func test_get_failsOnRequestError() {
-        let error = NSError(domain: "", code: 10, userInfo: [:])
-        expect(makeSut(), with: .failure(error), url: makeURL(), response: nil, error: error, data: nil)
+        expect(makeSut(), with: .failure(anyNSError()), url: makeURL(), response: nil, error: anyNSError(), data: nil)
     }
     
-    func test_get_failsOnAllNilValues() {
+    func test_get_failsOnAllInvalidCases() {
         expect(makeSut(), with: .failure(NSError(domain: "", code: 1, userInfo: nil)), url: makeURL(), response: nil, error: nil, data: nil)
-    }
-    
-    func test_get_failsOnErrorAndReponseNilValues() {
-        let data = "Test".data(using: .utf8)
-        expect(makeSut(), with: .failure(NSError(domain: "", code: 1, userInfo: nil)), url: makeURL(), response: nil, error: nil, data: data)
+        expect(makeSut(), with: .failure(anyNSError()), url: makeURL(), response: nil, error: nil, data: anyData())
+        expect(makeSut(), with: .failure(anyNSError()), url: makeURL(), response: nil, error: anyNSError(), data: anyData())
+        expect(makeSut(), with: .failure(anyNSError()), url: makeURL(), response: anyHttpURLResponse(), error: anyNSError(), data: anyData())
+        expect(makeSut(), with: .failure(anyNSError()), url: makeURL(), response: anyURLResponse(), error: anyNSError(), data: anyData())
+        expect(makeSut(), with: .failure(anyNSError()), url: makeURL(), response: nil, error: nil, data: anyData())
+        expect(makeSut(), with: .failure(anyNSError()), url: makeURL(), response: anyURLResponse(), error: nil, data: nil)
+        expect(makeSut(), with: .failure(anyNSError()), url: makeURL(), response: anyHttpURLResponse(), error: nil, data: nil)
+        expect(makeSut(), with: .failure(anyNSError()), url: makeURL(), response: anyURLResponse(), error: nil, data: anyData())
     }
 }
 
@@ -87,13 +89,13 @@ extension URLSessionHttpClientTests {
         return sut
     }
     
-    private func expect(_ sut: HttpClient, with expectedResult: HttpClientResult, url: URL, response: HTTPURLResponse?, error: Error?, data: Data?, file: StaticString = #filePath, line: UInt = #line) {
+    private func expect(_ sut: HttpClient, with expectedResult: HttpClientResult, url: URL, response: URLResponse?, error: Error?, data: Data?, file: StaticString = #filePath, line: UInt = #line) {
         URLProtocolStub.stub(url: url, response: response, error: error, data: data)
         let exp = expectation(description: "waiting")
         sut.get(from: makeURL()) { receivedResult in
             switch (receivedResult, expectedResult) {
-            case (.failure(let receivedError as NSError), .failure(let expectedError as NSError)):
-                XCTAssertEqual(expectedError.code, receivedError.code, file: file, line: line)
+            case (.failure, .failure):
+                break
             case (.success, .success):
                 break
             default:
@@ -104,13 +106,29 @@ extension URLSessionHttpClientTests {
         
         wait(for: [exp], timeout: 1)
     }
+
+    private func anyNSError() -> NSError {
+        return NSError(domain: "", code: 10, userInfo: [:])
+    }
+
+    private func anyData() -> Data {
+        return Data("Test Case".utf8)
+    }
+
+    private func anyHttpURLResponse() -> HTTPURLResponse {
+        return HTTPURLResponse(url: makeURL(), mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+    }
+
+    private func anyURLResponse() -> URLResponse {
+        return URLResponse(url: makeURL(), mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+    }
 }
 
 private class URLProtocolStub: URLProtocol {
     private static var stub: Stub?
     private static var requestObserver: ((URLRequest) -> Void)?
     
-    static func stub(url: URL, response: HTTPURLResponse?, error: Error?, data: Data?) {
+    static func stub(url: URL, response: URLResponse?, error: Error?, data: Data?) {
         URLProtocolStub.stub = Stub(error: error, response: response, data: data)
     }
     
@@ -152,5 +170,7 @@ private class URLProtocolStub: URLProtocol {
         client?.urlProtocolDidFinishLoading(self)
     }
     
-    override func stopLoading() {}
+    override func stopLoading() {
+        URLProtocolStub.requestObserver = nil
+    }
 }
