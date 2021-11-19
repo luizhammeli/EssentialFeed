@@ -12,6 +12,7 @@
 		250AEAF5273C28D6004D423C /* URLSessionHttpClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250AEAF4273C28D6004D423C /* URLSessionHttpClientTests.swift */; };
 		250AEAF8273CABCE004D423C /* XCTestCase+MemoryLeakTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250AEAF7273CABCE004D423C /* XCTestCase+MemoryLeakTrack.swift */; };
 		250AEAFA273CAC1F004D423C /* TestFactories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250AEAF9273CAC1F004D423C /* TestFactories.swift */; };
+		25AB33F6274558B70074885A /* URLSessionHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB33F5274558B70074885A /* URLSessionHttpClient.swift */; };
 		25BEF80A2736874B000D21F2 /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BEF8092736874B000D21F2 /* RemoteFeedLoader.swift */; };
 		25CEC165272C0300004BCFA9 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25CEC15C272C0300004BCFA9 /* EssentialFeed.framework */; };
 		25CEC175272C033D004BCFA9 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CEC174272C033D004BCFA9 /* FeedItem.swift */; };
@@ -35,6 +36,7 @@
 		250AEAF4273C28D6004D423C /* URLSessionHttpClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHttpClientTests.swift; sourceTree = "<group>"; };
 		250AEAF7273CABCE004D423C /* XCTestCase+MemoryLeakTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTrack.swift"; sourceTree = "<group>"; };
 		250AEAF9273CAC1F004D423C /* TestFactories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFactories.swift; sourceTree = "<group>"; };
+		25AB33F5274558B70074885A /* URLSessionHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHttpClient.swift; sourceTree = "<group>"; };
 		25BEF8092736874B000D21F2 /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
 		25CEC15C272C0300004BCFA9 /* EssentialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25CEC164272C0300004BCFA9 /* EssentialFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,7 @@
 				250AEAEE273A0576004D423C /* HttpClient.swift */,
 				25BEF8092736874B000D21F2 /* RemoteFeedLoader.swift */,
 				250AEAF0273A0591004D423C /* FeedItemMapper.swift */,
+				25AB33F5274558B70074885A /* URLSessionHttpClient.swift */,
 			);
 			path = "Feed API";
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				25CEC17827322DF1004BCFA9 /* FeedLoader.swift in Sources */,
 				250AEAF1273A0591004D423C /* FeedItemMapper.swift in Sources */,
 				25BEF80A2736874B000D21F2 /* RemoteFeedLoader.swift in Sources */,
+				25AB33F6274558B70074885A /* URLSessionHttpClient.swift in Sources */,
 				250AEAEF273A0576004D423C /* HttpClient.swift in Sources */,
 				25CEC175272C033D004BCFA9 /* FeedItem.swift in Sources */,
 			);
@@ -403,7 +407,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 7VX4BB4FYN;
+				DEVELOPMENT_TEAM = M2DD4Z95YZ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -433,7 +437,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 7VX4BB4FYN;
+				DEVELOPMENT_TEAM = M2DD4Z95YZ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -461,7 +465,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7VX4BB4FYN;
+				DEVELOPMENT_TEAM = M2DD4Z95YZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -483,7 +487,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7VX4BB4FYN;
+				DEVELOPMENT_TEAM = M2DD4Z95YZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
