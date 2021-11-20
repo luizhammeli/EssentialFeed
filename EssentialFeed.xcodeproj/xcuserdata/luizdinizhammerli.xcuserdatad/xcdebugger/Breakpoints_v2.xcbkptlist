@@ -103,69 +103,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CBEFBA11-E64B-46D1-A127-38F31C0AC577"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EssentialFeedTests/Feed API/URLSessionHttpClientTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "test_get_shouldRequestWithCorrectUrl()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CBEFBA11-E64B-46D1-A127-38F31C0AC577 - c08ccc626b38670b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Foundation.URLRequest) -&gt; () in EssentialFeedTests.URLSessionHttpClientTests.test_get_shouldRequestWithCorrectUrl() -&gt; ()"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20API/URLSessionHttpClientTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "517">
-               </Location>
-               <Location
-                  uuid = "CBEFBA11-E64B-46D1-A127-38F31C0AC577 - b5d13f0dcbe0a5f3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EssentialFeedTests.URLSessionHttpClientTests.test_get_shouldRequestWithCorrectUrl() -&gt; ()"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20API/URLSessionHttpClientTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "256">
-               </Location>
-               <Location
-                  uuid = "CBEFBA11-E64B-46D1-A127-38F31C0AC577 - c08ccc626b386775"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Foundation.URLRequest) -&gt; () in EssentialFeedTests.URLSessionHttpClientTests.test_get_shouldRequestWithCorrectUrl() -&gt; ()"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20API/URLSessionHttpClientTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "436">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "571B09D0-D921-4BB1-87D4-77F27297FA60"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -173,8 +110,8 @@
             filePath = "EssentialFeedTests/Feed API/URLSessionHttpClientTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "startLoading()"
             landmarkType = "7">
             <Locations>
@@ -266,8 +203,8 @@
             filePath = "EssentialFeedTests/Feed API/URLSessionHttpClientTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "startLoading()"
             landmarkType = "7">
             <Locations>
@@ -352,22 +289,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "937F8145-E431-4E2D-8D9C-DB4D20F95EBB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EssentialFeedTests/Feed API/URLSessionHttpClientTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "test_get_shouldRequestWithCorrectUrl()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "31F5A0F2-BAAD-4B69-B493-75FCB19A7792"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -375,8 +296,8 @@
             filePath = "EssentialFeedTests/Feed API/URLSessionHttpClientTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "startLoading()"
             landmarkType = "7">
          </BreakpointContent>
