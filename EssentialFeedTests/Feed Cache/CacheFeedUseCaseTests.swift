@@ -48,6 +48,12 @@ final class CacheFeedUseCaseTests: XCTestCase {
 // MARK: - Helpers
 
 extension CacheFeedUseCaseTests {
+    private func makeSut() -> (LocalFeedLoader, FeedStore) {
+        let feedStore = FeedStore()
+        let sut = LocalFeedLoader(store: feedStore)
+        return (sut, feedStore)
+    }
+    
     private func anyUniqueFeedItem() -> FeedItem {
         return .init(id: UUID(), imageURL: makeURL(), description: nil, location: nil)
     }
