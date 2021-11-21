@@ -30,18 +30,14 @@ final class LocalFeedLoader {
 }
 
 final class FeedStore {
-    private(set) var deleteCacheFeedCallCount = 0
-    private(set) var insertCacheFeedCallCount = 0
-    private var deletionCompletions: [((Error?) -> Void)] = []
+    private(set) var deletionCompletions: [((Error?) -> Void)] = []
     private(set) var insertions: [([FeedItem], Date)] = []
     
     func deleteCachedItems(completion: @escaping (Error?) -> Void) {
-        deleteCacheFeedCallCount += 1
         deletionCompletions.append(completion)
     }
     
     func insertCachedItems(items: [FeedItem], timestamp: Date, completion: @escaping (Error?) -> Void) {
-        insertCacheFeedCallCount += 1
         insertions.append((items, timestamp))
     }
     
@@ -59,14 +55,14 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let feedStore = FeedStore()
         let _ = makeSut()
         
-        XCTAssertEqual(feedStore.deleteCacheFeedCallCount, 0)
+        XCTAssertEqual(feedStore.deletionCompletions.count, 0)
     }
     
     func test_init_requestCacheDeletion() {
         let (sut, feedStore) = makeSut()
         sut.save(items: [anyUniqueFeedItem(), anyUniqueFeedItem()])
         
-        XCTAssertEqual(feedStore.deleteCacheFeedCallCount, 1)
+        XCTAssertEqual(feedStore.deletionCompletions.count, 1)
     }
     
     func test_init_doesNotRequestCacheInsertionOnDeletionError() {
@@ -74,17 +70,8 @@ final class CacheFeedUseCaseTests: XCTestCase {
         sut.save(items: [anyUniqueFeedItem(), anyUniqueFeedItem()])
         feedStore.completeDeletion(with: anyNSError())
         
-        XCTAssertEqual(feedStore.insertCacheFeedCallCount, 0)
+        XCTAssertEqual(feedStore.insertions.count, 0)
     }
-    
-    func test_init_requestCacheInsertionOnSuccessfullDeletion() {
-        let (sut, feedStore) = makeSut()
-        sut.save(items: [anyUniqueFeedItem(), anyUniqueFeedItem()])
-        feedStore.completeDeletion()
-        
-        XCTAssertEqual(feedStore.insertCacheFeedCallCount, 1)
-    }
-    
     
     func test_init_requestNewCacheInsertioWithTimeStampOnSuccessfullDeletion() {
         let timeStamp = Date()
