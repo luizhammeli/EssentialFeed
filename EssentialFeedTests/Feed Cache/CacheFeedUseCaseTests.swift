@@ -45,6 +45,10 @@ final class FeedStore {
     func completeDeletion(with error: Error, at index: Int = 0) {
         completions[index](error)
     }
+    
+    func completeDeletion(at index: Int = 0) {
+        completions[index](nil)
+    }
 }
 
 final class CacheFeedUseCaseTests: XCTestCase {
@@ -70,6 +74,15 @@ final class CacheFeedUseCaseTests: XCTestCase {
         feedStore.completeDeletion(with: anyNSError())
         
         XCTAssertEqual(feedStore.insertCacheFeedCallCount, 0)
+    }
+    
+    func test_init_requestCacheInsertionOnSuccessfulDeletion() {
+        let feedStore = FeedStore()
+        let sut = LocalFeedLoader(store: feedStore)
+        sut.save(items: [anyUniqueFeedItem(), anyUniqueFeedItem()])
+        feedStore.completeDeletion()
+        
+        XCTAssertEqual(feedStore.insertCacheFeedCallCount, 1)
     }
 }
 
