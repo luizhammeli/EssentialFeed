@@ -116,16 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				257962D5274A60CB0033DE0C /* CacheFeedUseCaseTests.swift */,
-				257962D7274A62230033DE0C /* New Group */,
 			);
 			path = "Feed Cache";
-			sourceTree = "<group>";
-		};
-		257962D7274A62230033DE0C /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		25BEF8082736874B000D21F2 /* Feed API */ = {
@@ -171,8 +163,8 @@
 		25CEC168272C0300004BCFA9 /* EssentialFeedTests */ = {
 			isa = PBXGroup;
 			children = (
-				257962D4274A60B00033DE0C /* Feed Cache */,
 				250AEAF6273CABB2004D423C /* Helpers */,
+				257962D4274A60B00033DE0C /* Feed Cache */,
 				250AEAF2273A0C1E004D423C /* Feed API */,
 			);
 			path = EssentialFeedTests;
