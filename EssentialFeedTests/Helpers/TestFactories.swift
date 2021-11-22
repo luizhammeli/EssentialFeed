@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import XCTest
+import EssentialFeed
 
 func makeURL() -> URL {
     return URL(string: "https://a-url.com")!
@@ -26,4 +26,8 @@ func anyHttpURLResponse() -> HTTPURLResponse {
 
 func anyURLResponse() -> URLResponse {
     return URLResponse(url: makeURL(), mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+}
+
+func anyUniqueFeedItem() -> FeedItem {
+    return .init(id: UUID(), imageURL: makeURL(), description: nil, location: nil)
 }
