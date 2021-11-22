@@ -10,3 +10,4 @@ build/
 *.xcuserstate
 *.xcbkptlist
 xcuserdata/
+*.xcbkptlist
