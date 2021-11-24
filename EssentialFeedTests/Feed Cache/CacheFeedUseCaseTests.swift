@@ -94,12 +94,12 @@ final class CacheFeedUseCaseTests: XCTestCase {
         }
     }
     
-    func test_save_doesNotCompleteIfSUTHasBeenDealocated() {
+    func test_save_doesNotDeliverDeletionErrorAfterSUTInstanceHasBeenDealocated() {
         var receivedValue: [Error] = []
         let feedStore = FeedStoreSpy()
         var sut: LocalFeedLoader? = LocalFeedLoader(store: feedStore, currentDate: Date.init)
                 
-        sut?.save(items: [anyUniqueFeedItem()]) { receivedValue.append($0!) }        
+        sut?.save(items: [anyUniqueFeedItem()]) { receivedValue.append($0!) }
         sut = nil
         feedStore.completeDeletion(with: anyNSError())
         
