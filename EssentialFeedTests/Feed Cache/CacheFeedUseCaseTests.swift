@@ -29,7 +29,7 @@ final class LocalFeedLoader {
     }
     
     private func cache(_ items: [FeedItem], with completion: @escaping (Error?) -> Void) {
-        self.store.insertCachedItems(items: items, timestamp: self.currentDate()) { [weak self] error in
+        self.store.insert(items: items, timestamp: self.currentDate()) { [weak self] error in
             guard self != nil else { return }
             completion(error)
         }
@@ -41,7 +41,7 @@ protocol FeedStore {
     typealias InsertionCompletion = (Error?) -> Void
     
     func deleteCachedItems(completion: @escaping DeletionCompletion)
-    func insertCachedItems(items: [FeedItem], timestamp: Date, completion: @escaping InsertionCompletion)
+    func insert(items: [FeedItem], timestamp: Date, completion: @escaping InsertionCompletion)
 }
 
 final class CacheFeedUseCaseTests: XCTestCase {
@@ -168,7 +168,7 @@ extension CacheFeedUseCaseTests {
             messages.append(.deleteCachedFeeds)
         }
         
-        func insertCachedItems(items: [FeedItem], timestamp: Date, completion: @escaping FeedStore.InsertionCompletion) {
+        func insert(items: [FeedItem], timestamp: Date, completion: @escaping FeedStore.InsertionCompletion) {
             messages.append(.insertFeeds(items, timestamp))
             insertCompletions.append(completion)
         }
