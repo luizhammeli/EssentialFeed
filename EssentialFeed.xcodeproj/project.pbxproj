@@ -134,7 +134,6 @@
 		25CEC152272C0300004BCFA9 = {
 			isa = PBXGroup;
 			children = (
-				25CEC15E272C0300004BCFA9 /* EssentialFeed */,
 				25CEC168272C0300004BCFA9 /* EssentialFeedTests */,
 				253B9A822749264400F44E9E /* EssentialFeedAPIEndToEndTests */,
 				25CEC15D272C0300004BCFA9 /* Products */,
@@ -163,6 +162,7 @@
 		25CEC168272C0300004BCFA9 /* EssentialFeedTests */ = {
 			isa = PBXGroup;
 			children = (
+				25CEC15E272C0300004BCFA9 /* EssentialFeed */,
 				250AEAF6273CABB2004D423C /* Helpers */,
 				257962D4274A60B00033DE0C /* Feed Cache */,
 				250AEAF2273A0C1E004D423C /* Feed API */,
