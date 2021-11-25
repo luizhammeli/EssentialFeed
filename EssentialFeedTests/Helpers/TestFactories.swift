@@ -31,3 +31,9 @@ func anyURLResponse() -> URLResponse {
 func anyUniqueFeedItem() -> FeedItem {
     return .init(id: UUID(), imageURL: makeURL(), description: nil, location: nil)
 }
+
+func anyUniqueFeedItems() -> (models: [FeedItem], localModels: [LocalFeedItem]) {
+    let models = [anyUniqueFeedItem(), anyUniqueFeedItem()]
+    let localModels = models.map { LocalFeedItem(id: $0.id, imageURL: $0.imageURL, description: $0.description, location: $0.location) }
+    return (models, localModels)
+}
