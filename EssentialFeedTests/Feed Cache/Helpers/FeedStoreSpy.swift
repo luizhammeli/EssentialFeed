@@ -54,4 +54,8 @@ final class FeedStoreSpy: FeedStore {
     func completreRetreive(with error: Error, at index: Int = 0) {
         retreiveCompletions[index](error)
     }
+    
+    func completeWithEmptyData(at index: Int = 0) {
+        retreiveCompletions[index](nil)
+    }
 }

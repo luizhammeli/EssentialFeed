@@ -33,6 +33,8 @@ public final class LocalFeedLoader {
             guard self != nil else { return }
             if let error = error {
                 completion(.failure(error))
+            } else {
+                completion(.success([]))
             }
         }
     }

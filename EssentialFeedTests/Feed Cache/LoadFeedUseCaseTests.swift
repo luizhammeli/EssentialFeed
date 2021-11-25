@@ -22,19 +22,17 @@ final class LoadFeedUseCaseTests: XCTestCase {
     }
     
     func test_load_loadFailsWithRetreivalError() {
-        var receivedResult: LoadFeedResult?
         let expectedError = anyNSError()
         let (sut, store) = makeSut()
-        
-        sut.load { receivedResult = $0 }
-        
-        store.completreRetreive(with: expectedError)
-        
-        switch receivedResult {
-        case let .failure(error):
-            XCTAssertEqual(error as NSError?, expectedError)
-        default:
-            XCTFail("Should complete with failure instead \(String(describing: receivedResult))")
+        expect(sut: sut, with: .failure(expectedError)) {
+            store.completreRetreive(with: expectedError)
+        }
+    }
+    
+    func test_load_deliversNoImagesOnEmptyCache() {
+        let (sut, store) = makeSut()
+        expect(sut: sut, with: .success([])) {
+            store.completeWithEmptyData()
         }
     }
 }
@@ -47,5 +45,22 @@ private extension LoadFeedUseCaseTests {
         checkForMemoryLeaks(instance: feedStore, file: file, line: line)
         checkForMemoryLeaks(instance: sut, file: file, line: line)
         return (sut, feedStore)
+    }
+    
+    private func expect(sut: LocalFeedLoader, with expectedResult: LoadFeedResult, when action: @escaping () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+        let exp = expectation(description: "Waiting for completion")
+        sut.load { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case (.success(let receivedImages), .success(let expectedImages)):
+                XCTAssertEqual(receivedImages, expectedImages, file: file, line: line)
+            case (.failure(let receivedError as NSError), .failure(let expectedError as NSError)):
+                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+            default:
+                XCTFail("Should complete with \(expectedResult) instead \(receivedResult).", file: file, line: line)
+            }
+            exp.fulfill()
+        }
+        action()
+        wait(for: [exp], timeout: 1.0)
     }
 }
