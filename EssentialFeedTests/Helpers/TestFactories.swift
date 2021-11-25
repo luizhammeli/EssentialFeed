@@ -28,12 +28,12 @@ func anyURLResponse() -> URLResponse {
     return URLResponse(url: makeURL(), mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
 }
 
-func anyUniqueFeedItem() -> FeedItem {
-    return .init(id: UUID(), imageURL: makeURL(), description: nil, location: nil)
+func anyUniqueFeedImage() -> FeedImage {
+    return .init(id: UUID(), url: makeURL(), description: nil, location: nil)
 }
 
-func anyUniqueFeedItems() -> (models: [FeedItem], localModels: [LocalFeedItem]) {
-    let models = [anyUniqueFeedItem(), anyUniqueFeedItem()]
-    let localModels = models.map { LocalFeedItem(id: $0.id, imageURL: $0.imageURL, description: $0.description, location: $0.location) }
+func anyUniqueFeedImages() -> (models: [FeedImage], localModels: [LocalFeedItem]) {
+    let models = [anyUniqueFeedImage(), anyUniqueFeedImage()]
+    let localModels = models.map { LocalFeedItem(id: $0.id, imageURL: $0.url, description: $0.description, location: $0.location) }
     return (models, localModels)
 }

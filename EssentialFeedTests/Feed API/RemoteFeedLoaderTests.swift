@@ -67,8 +67,8 @@ final class RemoteFeedLoaderTests: XCTestCase {
     
     func test_load_deliversItemsOn200HttpResponseWithValidData() {
         let (sut, clientSpy) = makeSut()
-        let feedItem1 = makeFeedItem(id: UUID(), imageURL: makeURL())
-        let feedItem2 = makeFeedItem(id: UUID(), imageURL: makeURL(), description: "Test Description", location: "Test Location")
+        let feedItem1 = makeFeedImage(id: UUID(), url: makeURL())
+        let feedItem2 = makeFeedImage(id: UUID(), url: makeURL(), description: "Test Description", location: "Test Location")
         let jsonData = makeFeedJson(items: [feedItem1.1, feedItem2.1])
         
         expect(sut: sut, toCompleteWith: .success([feedItem1.0, feedItem2.0])) {
@@ -80,7 +80,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
         let clientSpy = HttpClientSpy()
         var sut: RemoteFeedLoader? = RemoteFeedLoader(url: makeURL(), client: clientSpy)
         var capturedErrors: [LoadFeedResult] = []
-        let feedItem1 = makeFeedItem(id: UUID(), imageURL: makeURL())
+        let feedItem1 = makeFeedImage(id: UUID(), url: makeURL())
         let jsonData = makeFeedJson(items: [feedItem1.1])
         
         sut?.load(completion: { capturedErrors.append($0) })
@@ -118,12 +118,12 @@ private extension RemoteFeedLoaderTests {
         wait(for: [expectation], timeout: 1)
     }
     
-    private func makeFeedItem(id: UUID, imageURL: URL, description: String? = nil, location: String? = nil) -> (FeedItem, [String: Any]){
-        let feedItem = FeedItem(id: id, imageURL: imageURL, description: description, location: location)
-        let feedItemJson = ["id": id.uuidString, "image": imageURL.description, "location": location, "description": description].reduce(into: [String: Any]()) { partialResult, item in
+    private func makeFeedImage(id: UUID, url: URL, description: String? = nil, location: String? = nil) -> (FeedImage, [String: Any]){
+        let feedImage = FeedImage(id: id, url: url, description: description, location: location)
+        let feedItemJson = ["id": id.uuidString, "image": url.description, "location": location, "description": description].reduce(into: [String: Any]()) { partialResult, item in
             if let value = item.value { partialResult[item.key] = value }
         }
-        return (feedItem, feedItemJson)
+        return (feedImage, feedItemJson)
     }
     
     private func makeFeedJson(items: [[String: Any]]) -> Data {
