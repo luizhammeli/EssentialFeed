@@ -29,7 +29,7 @@ public final class LocalFeedLoader {
     }
     
     public func load(completion: @escaping (Error?) -> Void) {
-        self.store.retreive { error in
+        self.store.retrive { error in
             completion(error)
         }
     }

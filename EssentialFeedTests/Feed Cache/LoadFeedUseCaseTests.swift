@@ -15,13 +15,13 @@ final class LoadFeedUseCaseTests: XCTestCase {
         XCTAssertTrue(store.messages.isEmpty)
     }
     
-    func test_init_requestCacheRetreive() {
+    func test_init_requestCacheRetreival() {
         let (sut, store) = makeSut()
         sut.load() { _ in }
-        XCTAssertEqual(store.messages , [.retreive])
+        XCTAssertEqual(store.messages , [.retrive])
     }
     
-    func test_init_loadFailsWithRetreiveError() {
+    func test_init_loadFailsWithRetreivalError() {
         var receivedErrors = [Error?]()
         let expectedError = anyNSError()
         let (sut, store) = makeSut()
