@@ -14,6 +14,12 @@ final class LoadFeedUseCaseTests: XCTestCase {
         
         XCTAssertTrue(store.messages.isEmpty)
     }
+    
+    func test_init_requestCacheRetreive() {
+        let (sut, store) = makeSut()
+        sut.load()
+        XCTAssertEqual(store.messages , [.retreive])
+    }
 }
 
 // MARK: - Helpers
