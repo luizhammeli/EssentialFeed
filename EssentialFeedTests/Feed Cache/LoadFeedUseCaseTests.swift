@@ -17,8 +17,19 @@ final class LoadFeedUseCaseTests: XCTestCase {
     
     func test_init_requestCacheRetreive() {
         let (sut, store) = makeSut()
-        sut.load()
+        sut.load() { _ in }
         XCTAssertEqual(store.messages , [.retreive])
+    }
+    
+    func test_init_loadFailsWithRetreiveError() {
+        var receivedErrors = [Error?]()
+        let expectedError = anyNSError()
+        let (sut, store) = makeSut()
+        
+        sut.load { receivedErrors.append($0) }
+        
+        store.completreRetreive(with: expectedError)
+        XCTAssertEqual(receivedErrors as? [NSError], [expectedError])
     }
 }
 
