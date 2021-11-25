@@ -92,7 +92,6 @@ final class CacheFeedUseCaseTests: XCTestCase {
 }
 
 // MARK: - Helpers
-
 extension CacheFeedUseCaseTests {
     private func makeSut(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (LocalFeedLoader, FeedStoreSpy) {
         let feedStore = FeedStoreSpy()
