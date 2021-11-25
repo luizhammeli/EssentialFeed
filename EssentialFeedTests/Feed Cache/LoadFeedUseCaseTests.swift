@@ -32,7 +32,31 @@ final class LoadFeedUseCaseTests: XCTestCase {
     func test_load_deliversNoImagesOnEmptyCache() {
         let (sut, store) = makeSut()
         expect(sut: sut, with: .success([])) {
-            store.completeWithEmptyData()
+            store.completeRetriveWithEmptyData()            
+        }
+    }
+    
+    func test_load_deliversImagesOnLessThanSevenDaysOldCache() {
+        let (sut, store) = makeSut()
+        let images = anyUniqueFeedImages()
+        expect(sut: sut, with: .success(images.models)) {
+            store.completeRetrive(with: images.localModels, timestamp: Date().add(days: -7).add(seconds: 1))
+        }
+    }
+    
+    func test_load_deliversNoImagesWithSevenDaysOldCache() {
+        let (sut, store) = makeSut()
+        let images = anyUniqueFeedImages()
+        expect(sut: sut, with: .success([])) {
+            store.completeRetrive(with: images.localModels, timestamp: Date().add(days: -7))
+        }
+    }
+    
+    func test_load_deliversNoImagesWithMoreThanSevenDaysOldCache() {
+        let (sut, store) = makeSut()
+        let images = anyUniqueFeedImages()
+        expect(sut: sut, with: .success([])) {
+            store.completeRetrive(with: images.localModels, timestamp: Date().add(days: -7).add(days: -1))
         }
     }
 }
@@ -62,5 +86,15 @@ private extension LoadFeedUseCaseTests {
         }
         action()
         wait(for: [exp], timeout: 1.0)
+    }
+}
+
+private extension Date {
+    func add(days: Int) -> Date {
+        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
+    }
+    
+    func add(seconds: Int) -> Date {
+        return Calendar(identifier: .gregorian).date(byAdding: .second, value: seconds, to: self)!
     }
 }

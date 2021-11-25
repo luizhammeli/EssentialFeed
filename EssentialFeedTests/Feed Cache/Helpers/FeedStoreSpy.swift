@@ -30,7 +30,7 @@ final class FeedStoreSpy: FeedStore {
         insertCompletions.append(completion)
     }
     
-    func retrive(completion: @escaping (Error?) -> Void) {
+    func retrive(completion: @escaping FeedStore.RetreiveCompletion) {
         messages.append(.retrive)
         retreiveCompletions.append(completion)
     }
@@ -52,10 +52,14 @@ final class FeedStoreSpy: FeedStore {
     }
     
     func completreRetreive(with error: Error, at index: Int = 0) {
-        retreiveCompletions[index](error)
+        retreiveCompletions[index](.failure(error))
     }
     
-    func completeWithEmptyData(at index: Int = 0) {
-        retreiveCompletions[index](nil)
+    func completeRetriveWithEmptyData(at index: Int = 0) {
+        retreiveCompletions[index](.empty)
+    }
+    
+    func completeRetrive(with data: [LocalFeedItem], timestamp: Date = Date(), at index: Int = 0) {
+        retreiveCompletions[index](.found(data, timestamp: timestamp))
     }
 }
