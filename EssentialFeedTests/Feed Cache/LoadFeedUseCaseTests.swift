@@ -21,19 +21,47 @@ final class LoadFeedUseCaseTests: XCTestCase {
         XCTAssertEqual(store.messages , [.retrive])
     }
     
+    func test_load_deletesCacheOnRetreivalError() {
+        let (sut, store) = makeSut()
+        sut.load() { _ in }
+        store.completreRetreive(with: anyNSError())
+        XCTAssertEqual(store.messages , [.retrive, .deleteCachedFeeds])
+    }
+    
+    func test_load_doesNotDeletesCacheOnEmptyCache() {
+        let (sut, store) = makeSut()
+        sut.load() { _ in }
+        store.completeRetriveWithEmptyData()
+        XCTAssertEqual(store.messages , [.retrive])
+    }
+    
+    func test_load_doesNotDeletesCacheWithLessThanSevenDaysOldCache() {
+        let (sut, store) = makeSut()
+        sut.load() { _ in }
+        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -6))
+        XCTAssertEqual(store.messages , [.retrive])
+    }
+    
+    func test_load_deletesCacheWithMoreThanSevenDaysOldCache() {
+        let (sut, store) = makeSut()
+        sut.load() { _ in }
+        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -8))
+        XCTAssertEqual(store.messages , [.retrive, .deleteCachedFeeds])
+    }
+    
+    func test_load_deletesCacheWithSevenDaysOldCache() {
+        let (sut, store) = makeSut()
+        sut.load() { _ in }
+        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7))
+        XCTAssertEqual(store.messages , [.retrive, .deleteCachedFeeds])
+    }
+    
     func test_load_failsWithRetreivalError() {
         let expectedError = anyNSError()
         let (sut, store) = makeSut()
         expect(sut: sut, with: .failure(expectedError)) {
             store.completreRetreive(with: expectedError)
         }
-    }
-
-    func test_load_deleteCacheOnRetreivalError() {
-        let (sut, store) = makeSut()
-        sut.load() { _ in }
-        store.completeRetrive(with: <#T##[LocalFeedItem]#>)
-        XCTAssertEqual(store.messages , [.retrive, .deleteCachedFeeds])
     }
     
     func test_load_deliversNoImagesOnEmptyCache() {
@@ -65,6 +93,16 @@ final class LoadFeedUseCaseTests: XCTestCase {
         expect(sut: sut, with: .success([])) {
             store.completeRetrive(with: images.localModels, timestamp: Date().add(days: -7).add(days: -1))
         }
+    }
+    
+    func test_load_deliversNoImagesIfSutHasBeenDealocated() {
+        let feedStore = FeedStoreSpy()
+        var sut: LocalFeedLoader? = LocalFeedLoader(store: feedStore, currentDate: Date.init)
+        var items: [LoadFeedResult] = []
+        sut?.load(completion: { items.append($0) })
+        sut = nil
+        feedStore.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -3))
+        XCTAssertTrue(items.isEmpty)
     }
 }
 

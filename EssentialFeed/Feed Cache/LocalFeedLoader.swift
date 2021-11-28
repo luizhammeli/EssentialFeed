@@ -33,13 +33,25 @@ public final class LocalFeedLoader {
         self.store.retrive { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .failure(let error):
-                self.store.deleteCachedItems(completion: { _ in })
-                completion(.failure(error))
             case .found(let items, let timestamp) where self.isValid(timestamp) :
                 completion(.success(items.toModels()))
-            case .found, .empty:
+            case .failure(let error):
+                completion(.failure(error))
+            case .empty, .found:
                 completion(.success([]))
+            }
+        }
+    }
+    
+    public func validateCache() {
+        self.store.retrive { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure:
+                self.store.deleteCachedItems(completion: { _ in })
+            case .found(_, let timestamp) where !self.isValid(timestamp):
+                self.store.deleteCachedItems(completion: { _ in })
+            case .empty, .found: break
             }
         }
     }
@@ -50,7 +62,7 @@ public final class LocalFeedLoader {
             completion(error)
         }
     }
-
+    
     private var maxCacheAgeInDays: Int {
         return 7
     }
