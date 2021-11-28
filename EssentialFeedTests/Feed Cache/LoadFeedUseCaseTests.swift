@@ -21,18 +21,25 @@ final class LoadFeedUseCaseTests: XCTestCase {
         XCTAssertEqual(store.messages , [.retrive])
     }
     
-    func test_load_loadFailsWithRetreivalError() {
+    func test_load_failsWithRetreivalError() {
         let expectedError = anyNSError()
         let (sut, store) = makeSut()
         expect(sut: sut, with: .failure(expectedError)) {
             store.completreRetreive(with: expectedError)
         }
     }
+
+    func test_load_deleteCacheOnRetreivalError() {
+        let (sut, store) = makeSut()
+        sut.load() { _ in }
+        store.completeRetrive(with: <#T##[LocalFeedItem]#>)
+        XCTAssertEqual(store.messages , [.retrive, .deleteCachedFeeds])
+    }
     
     func test_load_deliversNoImagesOnEmptyCache() {
         let (sut, store) = makeSut()
         expect(sut: sut, with: .success([])) {
-            store.completeRetriveWithEmptyData()            
+            store.completeRetriveWithEmptyData()
         }
     }
     
