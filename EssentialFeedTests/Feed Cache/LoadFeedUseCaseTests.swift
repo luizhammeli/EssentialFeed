@@ -21,39 +21,39 @@ final class LoadFeedUseCaseTests: XCTestCase {
         XCTAssertEqual(store.messages , [.retrive])
     }
     
-    func test_load_deletesCacheOnRetreivalError() {
+    func test_load_hasNoSideEffectOnRetreivalError() {
         let (sut, store) = makeSut()
         sut.load() { _ in }
         store.completreRetreive(with: anyNSError())
-        XCTAssertEqual(store.messages , [.retrive, .deleteCachedFeeds])
-    }
-    
-    func test_load_doesNotDeletesCacheOnEmptyCache() {
-        let (sut, store) = makeSut()
-        sut.load() { _ in }
-        store.completeRetriveWithEmptyData()
         XCTAssertEqual(store.messages , [.retrive])
     }
     
-    func test_load_doesNotDeletesCacheWithLessThanSevenDaysOldCache() {
+    func test_load_hasNoSideEffectOnEmptyCache() {
+        let (sut, store) = makeSut()
+        sut.load() { _ in }
+        store.completeRetriveWithEmptyData()
+        XCTAssertEqual(store.messages, [.retrive])
+    }
+    
+    func test_load_hasNoSideEffectWithLessThanSevenDaysOldCache() {
         let (sut, store) = makeSut()
         sut.load() { _ in }
         store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -6))
         XCTAssertEqual(store.messages , [.retrive])
     }
     
-    func test_load_deletesCacheWithMoreThanSevenDaysOldCache() {
+    func test_load_hasNoSideEffectWithMoreThanSevenDaysOldCache() {
         let (sut, store) = makeSut()
         sut.load() { _ in }
         store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -8))
-        XCTAssertEqual(store.messages , [.retrive, .deleteCachedFeeds])
+        XCTAssertEqual(store.messages , [.retrive])
     }
     
-    func test_load_deletesCacheWithSevenDaysOldCache() {
+    func test_load_hasNoSideEffectWithSevenDaysOldCache() {
         let (sut, store) = makeSut()
         sut.load() { _ in }
         store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7))
-        XCTAssertEqual(store.messages , [.retrive, .deleteCachedFeeds])
+        XCTAssertEqual(store.messages , [.retrive])
     }
     
     func test_load_failsWithRetreivalError() {
