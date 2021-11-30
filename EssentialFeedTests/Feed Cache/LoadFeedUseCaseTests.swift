@@ -133,13 +133,3 @@ private extension LoadFeedUseCaseTests {
         wait(for: [exp], timeout: 1.0)
     }
 }
-
-private extension Date {
-    func add(days: Int) -> Date {
-        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
-    }
-    
-    func add(seconds: Int) -> Date {
-        return Calendar(identifier: .gregorian).date(byAdding: .second, value: seconds, to: self)!
-    }
-}
