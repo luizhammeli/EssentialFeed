@@ -36,7 +36,7 @@ final class ValidadeCacheUseCaseTest: XCTestCase {
         XCTAssertEqual(store.messages, [.retrive])
     }
     
-    func test_validateCache_deletesOnCacheExpiration() {
+    func test_validateCache_deletesCacheOnExpiration() {
         let (sut, store) = makeSut()
         sut.validateCache()
         store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7))
