@@ -35,24 +35,24 @@ final class LoadFeedUseCaseTests: XCTestCase {
         XCTAssertEqual(store.messages, [.retrive])
     }
     
-    func test_load_hasNoSideEffectWithLessThanSevenDaysOldCache() {
+    func test_load_hasNoSideEffectOnNonExpiredCache() {
         let (sut, store) = makeSut()
         sut.load() { _ in }
-        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -6))
+        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7).add(seconds: 1))
         XCTAssertEqual(store.messages , [.retrive])
     }
     
-    func test_load_hasNoSideEffectWithMoreThanSevenDaysOldCache() {
-        let (sut, store) = makeSut()
-        sut.load() { _ in }
-        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -8))
-        XCTAssertEqual(store.messages , [.retrive])
-    }
-    
-    func test_load_hasNoSideEffectWithSevenDaysOldCache() {
+    func test_load_hasNoSideEffectOnCacheExpiration() {
         let (sut, store) = makeSut()
         sut.load() { _ in }
         store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7))
+        XCTAssertEqual(store.messages , [.retrive])
+    }    
+    
+    func test_load_hasNoSideEffectOnExpiredCache() {
+        let (sut, store) = makeSut()
+        sut.load() { _ in }
+        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7).add(seconds: -1))
         XCTAssertEqual(store.messages , [.retrive])
     }
     
@@ -71,7 +71,7 @@ final class LoadFeedUseCaseTests: XCTestCase {
         }
     }
     
-    func test_load_deliversImagesOnLessThanSevenDaysOldCache() {
+    func test_load_deliversImagesOnNonExpiredCache() {
         let (sut, store) = makeSut()
         let images = anyUniqueFeedImages()
         expect(sut: sut, with: .success(images.models)) {
@@ -79,7 +79,7 @@ final class LoadFeedUseCaseTests: XCTestCase {
         }
     }
     
-    func test_load_deliversNoImagesWithSevenDaysOldCache() {
+    func test_load_deliversNoImagesOnCacheExpiration() {
         let (sut, store) = makeSut()
         let images = anyUniqueFeedImages()
         expect(sut: sut, with: .success([])) {
@@ -87,7 +87,7 @@ final class LoadFeedUseCaseTests: XCTestCase {
         }
     }
     
-    func test_load_deliversNoImagesWithMoreThanSevenDaysOldCache() {
+    func test_load_deliversNoImagesOnExpiredCache() {
         let (sut, store) = makeSut()
         let images = anyUniqueFeedImages()
         expect(sut: sut, with: .success([])) {

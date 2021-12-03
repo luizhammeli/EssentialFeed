@@ -29,25 +29,25 @@ final class ValidadeCacheUseCaseTest: XCTestCase {
         XCTAssertEqual(store.messages, [.retrive])
     }
     
-    func test_validateCache_deletesMoreThanSevenDaysOldCache() {
+    func test_validateCache_doesNotDeletesOnNonExpiredCache() {
         let (sut, store) = makeSut()
         sut.validateCache()
-        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7).add(days: -1))
-        XCTAssertEqual(store.messages, [.retrive, .deleteCachedFeeds])
+        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7).add(days: 1))
+        XCTAssertEqual(store.messages, [.retrive])
     }
     
-    func test_validateCache_deletesSevenDaysOldCache() {
+    func test_validateCache_deletesOnCacheExpiration() {
         let (sut, store) = makeSut()
         sut.validateCache()
         store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7))
         XCTAssertEqual(store.messages, [.retrive, .deleteCachedFeeds])
     }
     
-    func test_validateCache_doesNotDeletesLeessThanSevenDaysOldCache() {
+    func test_validateCache_deletesOnExpiredCache() {
         let (sut, store) = makeSut()
         sut.validateCache()
-        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7).add(days: 1))
-        XCTAssertEqual(store.messages, [.retrive])
+        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7).add(days: -1))
+        XCTAssertEqual(store.messages, [.retrive, .deleteCachedFeeds])
     }
     
     func test_validateCache_doesNotDeletesIfSutInstanceHasBeenDealocated() {
