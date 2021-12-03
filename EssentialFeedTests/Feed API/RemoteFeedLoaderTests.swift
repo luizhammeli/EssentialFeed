@@ -86,8 +86,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
         sut?.load(completion: { capturedErrors.append($0) })
         sut = nil
         clientSpy.complete(with: 200, data: jsonData)
-        
-        XCTAssertTrue(capturedErrors.isEmpty)
+                    XCTAssertTrue(capturedErrors.isEmpty)
     }
 }
 

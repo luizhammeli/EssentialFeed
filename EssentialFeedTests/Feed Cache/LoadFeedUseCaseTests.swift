@@ -38,21 +38,21 @@ final class LoadFeedUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectOnNonExpiredCache() {
         let (sut, store) = makeSut()
         sut.load() { _ in }
-        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7).add(seconds: 1))
+        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().minusFeedCacheMaxAge().add(seconds: 1))
         XCTAssertEqual(store.messages , [.retrive])
     }
     
     func test_load_hasNoSideEffectOnCacheExpiration() {
         let (sut, store) = makeSut()
         sut.load() { _ in }
-        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7))
+        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().minusFeedCacheMaxAge())
         XCTAssertEqual(store.messages , [.retrive])
     }    
     
     func test_load_hasNoSideEffectOnExpiredCache() {
         let (sut, store) = makeSut()
         sut.load() { _ in }
-        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -7).add(seconds: -1))
+        store.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().minusFeedCacheMaxAge().add(seconds: -1))
         XCTAssertEqual(store.messages , [.retrive])
     }
     
@@ -75,7 +75,7 @@ final class LoadFeedUseCaseTests: XCTestCase {
         let (sut, store) = makeSut()
         let images = anyUniqueFeedImages()
         expect(sut: sut, with: .success(images.models)) {
-            store.completeRetrive(with: images.localModels, timestamp: Date().add(days: -7).add(seconds: 1))
+            store.completeRetrive(with: images.localModels, timestamp: Date().minusFeedCacheMaxAge().add(seconds: 1))
         }
     }
     
@@ -83,7 +83,7 @@ final class LoadFeedUseCaseTests: XCTestCase {
         let (sut, store) = makeSut()
         let images = anyUniqueFeedImages()
         expect(sut: sut, with: .success([])) {
-            store.completeRetrive(with: images.localModels, timestamp: Date().add(days: -7))
+            store.completeRetrive(with: images.localModels, timestamp: Date().minusFeedCacheMaxAge())
         }
     }
     
@@ -91,7 +91,7 @@ final class LoadFeedUseCaseTests: XCTestCase {
         let (sut, store) = makeSut()
         let images = anyUniqueFeedImages()
         expect(sut: sut, with: .success([])) {
-            store.completeRetrive(with: images.localModels, timestamp: Date().add(days: -7).add(days: -1))
+            store.completeRetrive(with: images.localModels, timestamp: Date().minusFeedCacheMaxAge().add(seconds: -1))
         }
     }
     
@@ -101,7 +101,7 @@ final class LoadFeedUseCaseTests: XCTestCase {
         var items: [LoadFeedResult] = []
         sut?.load(completion: { items.append($0) })
         sut = nil
-        feedStore.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().add(days: -3))
+        feedStore.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().minusFeedCacheMaxAge())
         XCTAssertTrue(items.isEmpty)
     }
 }
