@@ -125,6 +125,26 @@ final class CodableFeedStoreTests: XCTestCase {
                         
         expect(sut: sut, with: .failure(anyNSError()))
     }
+    
+    func test_retrive_hasNoSideEffectsOnInvalidCache() {
+        let url = testSpecificStoreURL()
+        let sut = makeSut(storeURL: url)
+        
+        try! "Invalid Json".write(to: url, atomically: false, encoding: .utf8)
+                        
+        expect(sut: sut, with: .failure(anyNSError()))
+        expect(sut: sut, with: .failure(anyNSError()))
+    }
+    
+    func test_retrive_hasNoSideEffectsOnNonEmptyCache2() {
+        let sut = makeSut()
+        let secondInserteditems = anyUniqueFeedImages().localModels
+        let secondsInsertedTimestamp = Date()
+        
+        insert(sut: sut, items: anyUniqueFeedImages().localModels, timestamp: Date())
+        insert(sut: sut, items: secondInserteditems, timestamp: secondsInsertedTimestamp)
+        expect(sut: sut, toRetriveTwice: .found(secondInserteditems, timestamp: secondsInsertedTimestamp))
+    }
 }
 
 //MARK: - Helpers
