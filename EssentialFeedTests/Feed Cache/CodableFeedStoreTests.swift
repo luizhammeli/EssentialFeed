@@ -65,12 +65,14 @@ final class CodableFeedStore {
     }
     
     func retrive(completion: @escaping FeedStore.RetreiveCompletion) {
-        guard let data = try? Data(contentsOf: storeURL) else {
-            return completion(.empty)
-        }
+        guard let data = try? Data(contentsOf: storeURL) else { return completion(.empty) }
         
-        guard let cache = try? JSONDecoder().decode(Cache.self, from: data) else { return completion(.failure(NSError(domain: "", code: 10, userInfo: nil))) }
-        completion(.found(cache.localItems(), timestamp: cache.timestamp))
+        do {
+            let cache = try JSONDecoder().decode(Cache.self, from: data)
+            completion(.found(cache.localItems(), timestamp: cache.timestamp))
+        } catch {
+            completion(.failure(error))
+        }
     }
 }
 
@@ -154,9 +156,7 @@ private extension CodableFeedStoreTests {
                 XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
                 XCTAssertEqual(receivedDate, expectedDate, file: file, line: line)
                 
-            case (.empty, .empty): break
-                
-            case (.failure, .failure): break
+            case (.empty, .empty), (.failure, .failure): break                            
                 
             default:
                 XCTFail("Expected \(expectedResult) result got \(receivedResult) instead", file: file, line: line)
