@@ -89,90 +89,38 @@ final class CodableFeedStoreTests: XCTestCase {
     func test_retrive_deliversEmptyOnEmptyCache() {
         let sut = makeSut()
         
-        let expectation = expectation(description: "Waiting for request")
-        sut.retrive { result in
-            switch result {
-            case .empty: break
-            default:
-                XCTFail("Expected empty state got \(result) instead")
-            }
-            
-            expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 1)
+        expect(sut: sut, with: .empty)
     }
     
     func test_retrive_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSut()
-        
-        let expectation = expectation(description: "Waiting for request")
-        sut.retrive { firstResult in
-            sut.retrive { secondResult in
-                switch (firstResult, secondResult) {
-                case (.empty, .empty): break
-                default:
-                    XCTFail("Expected empty state got \(secondResult) and \(firstResult) instead")
-                }
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: 1)
+        expect(sut: sut, toRetriveTwice: .empty)
     }
     
-    func test_retriveAfterInsertingToEmptyCache_deliversInsertedValues() {
+    func test_retrive_deliversFoundValueOnNonEmptyCache() {
         let sut = makeSut()
-        
-        let expectation = expectation(description: "Waiting for request")
         let items = anyUniqueFeedImages().localModels
-        let expectedTimestamp = Date()
-        let expectedResult: RetrievedCacheResult = .found(items, timestamp: expectedTimestamp)
-        
-        sut.insert(items: items, timestamp: expectedTimestamp) { error in
-            XCTAssertNil(error)
-            sut.retrive { receivedResult in
-                switch (receivedResult, expectedResult) {
-                case (.found(let receivedItems, let receivedDate), .found(let expectedItems, let expectedDate)):
-                    XCTAssertEqual(receivedItems, expectedItems)
-                    XCTAssertEqual(receivedDate, expectedDate)
-                default:
-                    XCTFail("Expected \(expectedResult) result got \(receivedResult) instead")
-                }
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: 1)
+        let timestamp = Date()
+    
+        insert(sut: sut, items: items, timestamp: timestamp)
+        expect(sut: sut, with: .found(items, timestamp: timestamp))
     }
     
-    func test_delete_delieversNilOnEmptyCache() {
+    func test_retrive_hasNoSideEffectsOnNonEmptyCache() {
         let sut = makeSut()
-        var receivedError: Error?
+        let items = anyUniqueFeedImages().localModels
+        let timestamp = Date()
         
-        let exp = expectation(description: "Waiting for request")
-        sut.deleteCachedItems { error in
-            receivedError = error
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1)
-        XCTAssertNil(receivedError)
+        insert(sut: sut, items: items, timestamp: timestamp)
+        expect(sut: sut, toRetriveTwice: .found(items, timestamp: timestamp))
     }
     
-    func test_deleteAfterInsert_delieversNilOnSuccessDeletion() {
+    func test_retrive_deliversErrorOnInvalidCache() {
         let sut = makeSut()
-        var receivedError: Error?
         
-        let exp = expectation(description: "Waiting for request")
-        sut.insert(items: anyUniqueFeedImages().localModels, timestamp: Date()) { error in
-            sut.deleteCachedItems { error in
-                receivedError = error
-                exp.fulfill()
-            }
-        }
-        
-        wait(for: [exp], timeout: 1)
-        XCTAssertNil(receivedError)
+        try! "Invalid Json".write(to: storeURL(), atomically: false, encoding: .utf8)
+                        
+        expect(sut: sut, with: .failure(anyNSError()))
     }
 }
 
@@ -189,5 +137,42 @@ private extension CodableFeedStoreTests {
     
     private func deletesTestCache() {
         try? FileManager.default.removeItem(at: storeURL())
+    }
+    
+    private func expect(sut: CodableFeedStore, toRetriveTwice result: RetrievedCacheResult, file: StaticString = #filePath, line: UInt = #line) {
+        expect(sut: sut, with: result)
+        expect(sut: sut, with: result)
+    }
+    
+    private func expect(sut: CodableFeedStore, with expectedResult: RetrievedCacheResult, file: StaticString = #filePath, line: UInt = #line) {
+        let exp = expectation(description: "Waiting for request")
+        
+        sut.retrive { receivedResult in
+            switch (receivedResult, expectedResult) {
+                
+            case (.found(let receivedItems, let receivedDate), .found(let expectedItems, let expectedDate)):
+                XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
+                XCTAssertEqual(receivedDate, expectedDate, file: file, line: line)
+                
+            case (.empty, .empty): break
+                
+            case (.failure, .failure): break
+                
+            default:
+                XCTFail("Expected \(expectedResult) result got \(receivedResult) instead", file: file, line: line)
+            }
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1)
+    }
+    
+    private func insert(sut: CodableFeedStore, items: [LocalFeedItem], timestamp: Date) {
+        let expectation = expectation(description: "Waiting for request")
+        sut.insert(items: items, timestamp: timestamp) { error in
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
     }
 }
