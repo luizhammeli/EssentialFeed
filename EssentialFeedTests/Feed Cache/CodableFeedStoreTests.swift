@@ -118,9 +118,10 @@ final class CodableFeedStoreTests: XCTestCase {
     }
     
     func test_retrive_deliversErrorOnInvalidCache() {
-        let sut = makeSut()
+        let url = testSpecificStoreURL()
+        let sut = makeSut(storeURL: url)
         
-        try! "Invalid Json".write(to: storeURL(), atomically: false, encoding: .utf8)
+        try! "Invalid Json".write(to: url, atomically: false, encoding: .utf8)
                         
         expect(sut: sut, with: .failure(anyNSError()))
     }
@@ -128,17 +129,17 @@ final class CodableFeedStoreTests: XCTestCase {
 
 //MARK: - Helpers
 private extension CodableFeedStoreTests {
-    private func makeSut() -> CodableFeedStore {
-        let sut = CodableFeedStore(storeURL: storeURL())
+    private func makeSut(storeURL: URL? = nil) -> CodableFeedStore {
+        let sut = CodableFeedStore(storeURL: storeURL ?? testSpecificStoreURL())
         return sut
     }
     
-    private func storeURL() -> URL {
+    private func testSpecificStoreURL() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
     }
     
     private func deletesTestCache() {
-        try? FileManager.default.removeItem(at: storeURL())
+        try? FileManager.default.removeItem(at: testSpecificStoreURL())
     }
     
     private func expect(sut: CodableFeedStore, toRetriveTwice result: RetrievedCacheResult, file: StaticString = #filePath, line: UInt = #line) {
@@ -156,7 +157,7 @@ private extension CodableFeedStoreTests {
                 XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
                 XCTAssertEqual(receivedDate, expectedDate, file: file, line: line)
                 
-            case (.empty, .empty), (.failure, .failure): break                            
+            case (.empty, .empty), (.failure, .failure): break
                 
             default:
                 XCTFail("Expected \(expectedResult) result got \(receivedResult) instead", file: file, line: line)
