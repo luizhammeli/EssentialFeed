@@ -38,7 +38,6 @@ extension LocalFeedLoader {
         }
     }
 }
-    
 
 // MARK: - Load
 extension LocalFeedLoader {
