@@ -76,7 +76,6 @@ final class CodableFeedStore {
     }
 }
 
-
 final class CodableFeedStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
@@ -136,7 +135,23 @@ final class CodableFeedStoreTests: XCTestCase {
         expect(sut: sut, with: .failure(anyNSError()))
     }
     
-    func test_retrive_hasNoSideEffectsOnNonEmptyCache2() {
+    func test_retrive_overridesPreviouslyInsertedCacheValue() {
+        let url = testSpecificStoreURL()
+        let sut = makeSut(storeURL: url)
+        
+        let latestedFeedCache = anyUniqueFeedImages()
+        let latestedFeedCacheTimestamp = Date()
+        
+        let previousFeedError = insert(sut: sut, items: anyUniqueFeedImages().localModels, timestamp: Date())
+        XCTAssertNil(previousFeedError)
+        
+        let latestedFeedError = insert(sut: sut, items: latestedFeedCache.localModels, timestamp: latestedFeedCacheTimestamp)
+        XCTAssertNil(latestedFeedError)
+                        
+        expect(sut: sut, with: .found(latestedFeedCache.localModels, timestamp: latestedFeedCacheTimestamp))
+    }
+    
+    func test_retrive_hasNoSideEffectsWhenOverridesPreviouslyInsertedCacheValue() {
         let sut = makeSut()
         let secondInserteditems = anyUniqueFeedImages().localModels
         let secondsInsertedTimestamp = Date()
@@ -188,12 +203,16 @@ private extension CodableFeedStoreTests {
         wait(for: [exp], timeout: 1)
     }
     
-    private func insert(sut: CodableFeedStore, items: [LocalFeedItem], timestamp: Date) {
+    @discardableResult
+    private func insert(sut: CodableFeedStore, items: [LocalFeedItem], timestamp: Date) -> Error? {
         let expectation = expectation(description: "Waiting for request")
+        var expectedError: Error?
         sut.insert(items: items, timestamp: timestamp) { error in
             XCTAssertNil(error)
+            expectedError = error
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
+        return expectedError
     }
 }
