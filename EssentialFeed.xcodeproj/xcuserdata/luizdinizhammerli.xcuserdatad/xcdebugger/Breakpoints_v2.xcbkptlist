@@ -110,8 +110,8 @@
             filePath = "EssentialFeedTests/Feed Cache/CodableFeedStoreTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "deleteCachedItems(completion:)"
             landmarkType = "7">
             <Locations>
@@ -128,10 +128,10 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "49"
                   endingLineNumber = "49"
-                  offsetFromSymbolStart = "376">
+                  offsetFromSymbolStart = "817">
                </Location>
                <Location
-                  uuid = "CE427B47-C19A-416B-8107-723E78047FBF - d031196ab6ed5463"
+                  uuid = "CE427B47-C19A-416B-8107-723E78047FBF - d031196ab6ed5442"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -141,24 +141,9 @@
                   urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "712">
-               </Location>
-               <Location
-                  uuid = "CE427B47-C19A-416B-8107-723E78047FBF - d031196ab6ed5463"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EssentialFeedTests.CodableFeedStore.deleteCachedItems(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "814">
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "1064">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -173,11 +158,26 @@
             filePath = "EssentialFeedTests/Feed Cache/CodableFeedStoreTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "deleteCachedItems(completion:)"
             landmarkType = "7">
             <Locations>
+               <Location
+                  uuid = "ACE15AEA-4424-4D55-8875-330BC85494BF - d031196ab6ed5442"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeedTests.CodableFeedStore.deleteCachedItems(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "EssentialFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "817">
+               </Location>
                <Location
                   uuid = "ACE15AEA-4424-4D55-8875-330BC85494BF - d031196ab6ed5421"
                   shouldBeEnabled = "Yes"
@@ -191,37 +191,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "48"
                   endingLineNumber = "48"
-                  offsetFromSymbolStart = "176">
-               </Location>
-               <Location
-                  uuid = "ACE15AEA-4424-4D55-8875-330BC85494BF - d031196ab6ed5442"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EssentialFeedTests.CodableFeedStore.deleteCachedItems(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "476">
-               </Location>
-               <Location
-                  uuid = "ACE15AEA-4424-4D55-8875-330BC85494BF - d031196ab6ed5442"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EssentialFeedTests.CodableFeedStore.deleteCachedItems(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "560">
+                  offsetFromSymbolStart = "817">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -240,6 +210,102 @@
             endingLineNumber = "46"
             landmarkName = "deleteCachedItems(completion:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "12ED6D77-800D-46A8-AB67-B68C02B721D8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeedTests/Feed Cache/CodableFeedStoreTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
+            landmarkName = "insert(sut:items:timestamp:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "12ED6D77-800D-46A8-AB67-B68C02B721D8 - ee553eb9fd3e188f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[1] = Stack Promoted from Box&gt; of closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EssentialFeedTests.CodableFeedStoreTests.insert(sut: EssentialFeedTests.CodableFeedStore, items: Swift.Array&lt;EssentialFeed.LocalFeedItem&gt;, timestamp: Foundation.Date) -&gt; Swift.Optional&lt;Swift.Error&gt;"
+                  moduleName = "EssentialFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "242"
+                  endingLineNumber = "242"
+                  offsetFromSymbolStart = "137">
+               </Location>
+               <Location
+                  uuid = "12ED6D77-800D-46A8-AB67-B68C02B721D8 - a79b17e722da5e54"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EssentialFeedTests.CodableFeedStoreTests.insert(sut: EssentialFeedTests.CodableFeedStore, items: Swift.Array&lt;EssentialFeed.LocalFeedItem&gt;, timestamp: Foundation.Date) -&gt; Swift.Optional&lt;Swift.Error&gt;"
+                  moduleName = "EssentialFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "242"
+                  endingLineNumber = "242"
+                  offsetFromSymbolStart = "147">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9C58DB85-A7D5-447A-BB2A-F109C87AB1B6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeedTests/Feed Cache/CodableFeedStoreTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "insert(sut:items:timestamp:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9C58DB85-A7D5-447A-BB2A-F109C87AB1B6 - ee553eb9fd3e18ae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[1] = Stack Promoted from Box&gt; of closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EssentialFeedTests.CodableFeedStoreTests.insert(sut: EssentialFeedTests.CodableFeedStore, items: Swift.Array&lt;EssentialFeed.LocalFeedItem&gt;, timestamp: Foundation.Date) -&gt; Swift.Optional&lt;Swift.Error&gt;"
+                  moduleName = "EssentialFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "241"
+                  endingLineNumber = "241"
+                  offsetFromSymbolStart = "74">
+               </Location>
+               <Location
+                  uuid = "9C58DB85-A7D5-447A-BB2A-F109C87AB1B6 - a79b17e722da5e75"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EssentialFeedTests.CodableFeedStoreTests.insert(sut: EssentialFeedTests.CodableFeedStore, items: Swift.Array&lt;EssentialFeed.LocalFeedItem&gt;, timestamp: Foundation.Date) -&gt; Swift.Optional&lt;Swift.Error&gt;"
+                  moduleName = "EssentialFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "241"
+                  endingLineNumber = "241"
+                  offsetFromSymbolStart = "82">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
