@@ -154,9 +154,9 @@
 		257962D9274EB91E0033DE0C /* Feed Cache */ = {
 			isa = PBXGroup;
 			children = (
-				257962DA274EB95B0033DE0C /* LocalFeedLoader.swift */,
 				257962DC274EB9E70033DE0C /* FeedStore.swift */,
 				253542592759B2EC00037EC3 /* FeedCachePolicy.swift */,
+				257962DA274EB95B0033DE0C /* LocalFeedLoader.swift */,
 				259CB155276848AA00C19315 /* CodableFeedStore.swift */,
 			);
 			path = "Feed Cache";

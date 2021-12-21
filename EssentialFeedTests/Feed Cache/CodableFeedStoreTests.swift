@@ -21,7 +21,6 @@ final class CodableFeedStoreTests: XCTestCase {
     
     func test_retrive_deliversEmptyOnEmptyCache() {
         let sut = makeSut()
-        
         expect(sut: sut, with: .empty)
     }
     
@@ -128,6 +127,32 @@ final class CodableFeedStoreTests: XCTestCase {
         let deletionError = deleteCache(sut: sut)
         XCTAssertNotNil(deletionError, "Expected not nil error")
     }
+    
+    func test_storeSideEffects_runSerially() {
+        let sut = makeSut(storeURL: cacheDirectory())
+        var operations = [XCTestExpectation]()
+        
+        let op1 = expectation(description: "Operation 1")
+        sut.insert(items: anyUniqueFeedImages().localModels, timestamp: Date()) { _ in
+            operations.append(op1)
+            op1.fulfill()
+        }
+        
+        let op2 = expectation(description: "Operation 2")
+        sut.deleteCachedItems { _ in
+            operations.append(op2)
+            op2.fulfill()
+        }
+        
+        let op3 = expectation(description: "Operation 3")
+        sut.insert(items: anyUniqueFeedImages().localModels, timestamp: Date()) { _ in
+            operations.append(op3)
+            op3.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10.0)
+        XCTAssertEqual(operations, [op1, op2, op3])
+    }
 }
 
 //MARK: - Helpers
@@ -172,7 +197,7 @@ private extension CodableFeedStoreTests {
             exp.fulfill()
         }
         
-        wait(for: [exp], timeout: 1)
+        wait(for: [exp], timeout: 5)
     }
     
     @discardableResult
@@ -183,7 +208,7 @@ private extension CodableFeedStoreTests {
             expectedError = error
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 5)
         return expectedError
     }
     
@@ -196,7 +221,7 @@ private extension CodableFeedStoreTests {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 10 )
         return expectedError
     }
 }

@@ -103,97 +103,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "12ED6D77-800D-46A8-AB67-B68C02B721D8"
+            uuid = "A6FDA527-BAF9-4F45-BB67-5EC532DF201A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EssentialFeedTests/Feed Cache/CodableFeedStoreTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "insert(sut:items:timestamp:)"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "test_storeSideEffects_runSerially()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "12ED6D77-800D-46A8-AB67-B68C02B721D8 - ee553eb9fd3e188f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[1] = Stack Promoted from Box&gt; of closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EssentialFeedTests.CodableFeedStoreTests.insert(sut: EssentialFeedTests.CodableFeedStore, items: Swift.Array&lt;EssentialFeed.LocalFeedItem&gt;, timestamp: Foundation.Date) -&gt; Swift.Optional&lt;Swift.Error&gt;"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "242"
-                  endingLineNumber = "242"
-                  offsetFromSymbolStart = "137">
-               </Location>
-               <Location
-                  uuid = "12ED6D77-800D-46A8-AB67-B68C02B721D8 - a79b17e722da5e54"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EssentialFeedTests.CodableFeedStoreTests.insert(sut: EssentialFeedTests.CodableFeedStore, items: Swift.Array&lt;EssentialFeed.LocalFeedItem&gt;, timestamp: Foundation.Date) -&gt; Swift.Optional&lt;Swift.Error&gt;"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "242"
-                  endingLineNumber = "242"
-                  offsetFromSymbolStart = "147">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9C58DB85-A7D5-447A-BB2A-F109C87AB1B6"
+            uuid = "7470F2D0-0476-47FA-B94E-6131D9B032DF"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EssentialFeedTests/Feed Cache/CodableFeedStoreTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "insert(sut:items:timestamp:)"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "test_storeSideEffects_runSerially()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9C58DB85-A7D5-447A-BB2A-F109C87AB1B6 - ee553eb9fd3e18ae"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[1] = Stack Promoted from Box&gt; of closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EssentialFeedTests.CodableFeedStoreTests.insert(sut: EssentialFeedTests.CodableFeedStore, items: Swift.Array&lt;EssentialFeed.LocalFeedItem&gt;, timestamp: Foundation.Date) -&gt; Swift.Optional&lt;Swift.Error&gt;"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "74">
-               </Location>
-               <Location
-                  uuid = "9C58DB85-A7D5-447A-BB2A-F109C87AB1B6 - a79b17e722da5e75"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EssentialFeedTests.CodableFeedStoreTests.insert(sut: EssentialFeedTests.CodableFeedStore, items: Swift.Array&lt;EssentialFeed.LocalFeedItem&gt;, timestamp: Foundation.Date) -&gt; Swift.Optional&lt;Swift.Error&gt;"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeedTests/Feed%20Cache/CodableFeedStoreTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "82">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3446E748-A78F-4908-ABEE-A22F2067A11F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeedTests/Feed Cache/CodableFeedStoreTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "test_storeSideEffects_runSerially()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
