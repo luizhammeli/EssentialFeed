@@ -8,7 +8,35 @@
 import XCTest
 import EssentialFeed
 
-final class CodableFeedStoreTests: XCTestCase {
+protocol FeedStoreSpecs {
+    func test_retrive_deliversEmptyOnEmptyCache()
+
+    func test_retrive_hasNoSideEffectsOnEmptyCache()
+
+    func test_retrive_deliversFoundValueOnNonEmptyCache()
+
+    func test_retrive_hasNoSideEffectsOnNonEmptyCache()
+
+    func test_retrive_deliversErrorOnInvalidCache()
+
+    func test_retrive_hasNoSideEffectsOnInvalidCache()
+
+    func test_retrive_overridesPreviouslyInsertedCacheValue()
+
+    func test_retrive_hasNoSideEffectsWhenOverridesPreviouslyInsertedCacheValue()
+
+    func test_deleteCachedItems_deliversNoErrorWithEmptyCache()
+
+    func test_deleteCachedItems_hasNoSideEffectOnEmptyCache()
+
+    func test_deleteCachedItems_deliversNoErrorWithNonEmptyCache()
+
+    func test_deleteCachedItems_deliversErrorOnDeletionError()
+
+    func test_storeSideEffects_runSerially()
+}
+
+final class CodableFeedStoreTests: XCTestCase, FeedStoreSpecs {
     override func setUp() {
         super.setUp()
         deletesTestCache()
@@ -172,56 +200,5 @@ private extension CodableFeedStoreTests {
     
     private func deletesTestCache() {
         try? FileManager.default.removeItem(at: testSpecificStoreURL())
-    }
-    
-    private func expect(sut: FeedStore, toRetriveTwice result: RetrievedCacheResult, file: StaticString = #filePath, line: UInt = #line) {
-        expect(sut: sut, with: result)
-        expect(sut: sut, with: result)
-    }
-    
-    private func expect(sut: FeedStore, with expectedResult: RetrievedCacheResult, file: StaticString = #filePath, line: UInt = #line) {
-        let exp = expectation(description: "Waiting for request")
-        
-        sut.retrive { receivedResult in
-            switch (receivedResult, expectedResult) {
-                
-            case (.found(let receivedItems, let receivedDate), .found(let expectedItems, let expectedDate)):
-                XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
-                XCTAssertEqual(receivedDate, expectedDate, file: file, line: line)
-                
-            case (.empty, .empty), (.failure, .failure): break
-                
-            default:
-                XCTFail("Expected \(expectedResult) result got \(receivedResult) instead", file: file, line: line)
-            }
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 5)
-    }
-    
-    @discardableResult
-    private func insert(sut: FeedStore, items: [LocalFeedItem], timestamp: Date) -> Error? {
-        let expectation = expectation(description: "Waiting for request")
-        var expectedError: Error?
-        sut.insert(items: items, timestamp: timestamp) { error in
-            expectedError = error
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 5)
-        return expectedError
-    }
-    
-    private func deleteCache(sut: FeedStore) -> Error? {
-        var expectedError: Error?
-        let expectation = expectation(description: "Waiting for deletion")
-        
-        sut.deleteCachedItems { error in
-            expectedError = error
-            expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 10 )
-        return expectedError
     }
 }
