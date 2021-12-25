@@ -9,22 +9,22 @@ import XCTest
 import EssentialFeed
 
 extension FeedStoreSpecs where Self: XCTestCase {
-    func expect(sut: FeedStore, toRetriveTwice result: RetrievedCacheResult, file: StaticString = #filePath, line: UInt = #line) {
+    func expect(sut: FeedStore, toRetriveTwice result: FeedStore.RetrievedResult, file: StaticString = #filePath, line: UInt = #line) {
         expect(sut: sut, with: result)
         expect(sut: sut, with: result)
     }
     
-    func expect(sut: FeedStore, with expectedResult: RetrievedCacheResult, file: StaticString = #filePath, line: UInt = #line) {
+    func expect(sut: FeedStore, with expectedResult: FeedStore.RetrievedResult, file: StaticString = #filePath, line: UInt = #line) {
         let exp = expectation(description: "Waiting for request")
         
         sut.retrive { receivedResult in
             switch (receivedResult, expectedResult) {
                 
-            case (.found(let receivedItems, let receivedDate), .found(let expectedItems, let expectedDate)):
+            case let (.success(.some((receivedItems, receivedDate))), .success(.some((expectedItems, expectedDate)))):
                 XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
                 XCTAssertEqual(receivedDate, expectedDate, file: file, line: line)
                 
-            case (.empty, .empty), (.failure, .failure): break
+            case (.success(nil), .success(nil)), (.failure, .failure): break
                 
             default:
                 XCTFail("Expected \(expectedResult) result got \(receivedResult) instead", file: file, line: line)

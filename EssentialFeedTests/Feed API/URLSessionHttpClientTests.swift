@@ -95,7 +95,7 @@ extension URLSessionHttpClientTests {
     private func successValueFor(response: URLResponse?, error: Error?, data: Data?, file: StaticString = #filePath, line: UInt = #line) -> (Data, HTTPURLResponse)? {
         let result = resultValueFor(response: response, error: error, data: data)
         switch result {
-        case let .success(data, response):
+        case let .success((data, response)):
             return (data, response)
         default:
             XCTFail("Expected success got \(String(describing: result)) instead", file: file, line: line)
@@ -103,11 +103,11 @@ extension URLSessionHttpClientTests {
         return nil
     }
     
-    private func resultValueFor(response: URLResponse?, error: Error?, data: Data?) -> HttpClientResult? {
+    private func resultValueFor(response: URLResponse?, error: Error?, data: Data?) -> HttpClient.Result? {
         URLProtocolStub.stub(url: makeURL(), response: response, error: error, data: data)
         let sut = makeSut()
         let exp = expectation(description: "waiting")
-        var receivedResult: HttpClientResult?
+        var receivedResult: HttpClient.Result?
         sut.get(from: makeURL()) { result in
             receivedResult = result
             exp.fulfill()

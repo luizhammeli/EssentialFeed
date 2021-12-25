@@ -21,12 +21,12 @@ final class CodableFeedStoreTests: XCTestCase, FeedStoreSpecs {
     
     func test_retrive_deliversEmptyOnEmptyCache() {
         let sut = makeSut()
-        expect(sut: sut, with: .empty)
+        expect(sut: sut, with: .success(nil))
     }
     
     func test_retrive_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSut()
-        expect(sut: sut, toRetriveTwice: .empty)
+        expect(sut: sut, toRetriveTwice: .success(nil))
     }
     
     func test_retrive_deliversFoundValueOnNonEmptyCache() {
@@ -35,7 +35,7 @@ final class CodableFeedStoreTests: XCTestCase, FeedStoreSpecs {
         let timestamp = Date()
     
         insert(sut: sut, items: items, timestamp: timestamp)
-        expect(sut: sut, with: .found(items, timestamp: timestamp))
+        expect(sut: sut, with: .success((items, timestamp: timestamp)))
     }
     
     func test_retrive_hasNoSideEffectsOnNonEmptyCache() {
@@ -44,7 +44,7 @@ final class CodableFeedStoreTests: XCTestCase, FeedStoreSpecs {
         let timestamp = Date()
         
         insert(sut: sut, items: items, timestamp: timestamp)
-        expect(sut: sut, toRetriveTwice: .found(items, timestamp: timestamp))
+        expect(sut: sut, toRetriveTwice: .success((items, timestamp: timestamp)))
     }
     
     func test_retrive_deliversErrorOnInvalidCache() {
@@ -79,7 +79,7 @@ final class CodableFeedStoreTests: XCTestCase, FeedStoreSpecs {
         let latestedFeedError = insert(sut: sut, items: latestedFeedCache.localModels, timestamp: latestedFeedCacheTimestamp)
         XCTAssertNil(latestedFeedError, "Expected insert with success")
                         
-        expect(sut: sut, with: .found(latestedFeedCache.localModels, timestamp: latestedFeedCacheTimestamp))
+        expect(sut: sut, with: .success((latestedFeedCache.localModels, timestamp: latestedFeedCacheTimestamp)))
     }
     
     func test_retrive_hasNoSideEffectsWhenOverridesPreviouslyInsertedCacheValue() {
@@ -89,7 +89,7 @@ final class CodableFeedStoreTests: XCTestCase, FeedStoreSpecs {
         
         insert(sut: sut, items: anyUniqueFeedImages().localModels, timestamp: Date())
         insert(sut: sut, items: latestedFeedCache, timestamp: latestedFeedCacheTimestamp)
-        expect(sut: sut, toRetriveTwice: .found(latestedFeedCache, timestamp: latestedFeedCacheTimestamp))
+        expect(sut: sut, toRetriveTwice: .success((latestedFeedCache, timestamp: latestedFeedCacheTimestamp)))
     }
     
     func test_deleteCachedItems_deliversNoErrorWithEmptyCache() {
@@ -98,7 +98,7 @@ final class CodableFeedStoreTests: XCTestCase, FeedStoreSpecs {
         let deletionError = deleteCache(sut: sut)
         XCTAssertNil(deletionError, "Expected delete with success")
         
-        expect(sut: sut, with: .empty)
+        expect(sut: sut, with: .success(nil))
     }
     
     func test_deleteCachedItems_hasNoSideEffectOnEmptyCache() {
@@ -107,7 +107,7 @@ final class CodableFeedStoreTests: XCTestCase, FeedStoreSpecs {
         let deletionError = deleteCache(sut: sut)
         XCTAssertNil(deletionError, "Expected delete with success")
                 
-        expect(sut: sut, toRetriveTwice: .empty)
+        expect(sut: sut, toRetriveTwice: .success(nil))
     }
     
     func test_deleteCachedItems_deliversNoErrorWithNonEmptyCache() {
@@ -117,7 +117,7 @@ final class CodableFeedStoreTests: XCTestCase, FeedStoreSpecs {
         let deletionError = deleteCache(sut: sut)
         XCTAssertNil(deletionError, "Expected delete with success")
         
-        expect(sut: sut, with: .empty)
+        expect(sut: sut, with: .success(nil))
     }
     
     func test_deleteCachedItems_deliversErrorOnDeletionError() {

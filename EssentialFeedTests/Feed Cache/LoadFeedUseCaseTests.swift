@@ -98,7 +98,7 @@ final class LoadFeedUseCaseTests: XCTestCase {
     func test_load_deliversNoImagesIfSutHasBeenDealocated() {
         let feedStore = FeedStoreSpy()
         var sut: LocalFeedLoader? = LocalFeedLoader(store: feedStore, currentDate: Date.init)
-        var items: [LoadFeedResult] = []
+        var items: [FeedLoader.Result] = []
         sut?.load(completion: { items.append($0) })
         sut = nil
         feedStore.completeRetrive(with: anyUniqueFeedImages().localModels, timestamp: Date().minusFeedCacheMaxAge())
@@ -116,7 +116,7 @@ private extension LoadFeedUseCaseTests {
         return (sut, feedStore)
     }
     
-    private func expect(sut: LocalFeedLoader, with expectedResult: LoadFeedResult, when action: @escaping () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+    private func expect(sut: LocalFeedLoader, with expectedResult: FeedLoader.Result, when action: @escaping () -> Void, file: StaticString = #filePath, line: UInt = #line) {
         let exp = expectation(description: "Waiting for completion")
         sut.load { receivedResult in
             switch (receivedResult, expectedResult) {

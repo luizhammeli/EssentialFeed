@@ -16,6 +16,11 @@ final class EssentialFeedCacheIntegrationTests: XCTestCase {
         deletesTestCache(fileName: fileName)
     }
     
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        deletesTestCache(fileName: fileName)
+    }
+    
     func test_load_completesWithEmptyArrayWhenCacheIsEmpty() {
         expect(sut: makeSut(), with: [])
     }
@@ -35,6 +40,17 @@ final class EssentialFeedCacheIntegrationTests: XCTestCase {
         save(sut: sut, models: feedItems.models)
         deletesTestCache(fileName: fileName)
         expect(sut: sut, with: [])
+    }
+    
+    func test_save_deliversCorrectReplacedDataAfterTwoSaveOperations() {
+        let sutToFirstSave = makeSut()
+        let sutToLastSave = makeSut()
+        let sutToLoad = makeSut()
+        let feedItems = anyUniqueFeedImages()
+        
+        save(sut: sutToFirstSave, models: anyUniqueFeedImages().models)
+        save(sut: sutToLastSave, models: feedItems.models)
+        expect(sut: sutToLoad   , with: feedItems.models)
     }
 }
 
