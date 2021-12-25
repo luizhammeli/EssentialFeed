@@ -86,7 +86,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
         sut?.load(completion: { capturedErrors.append($0) })
         sut = nil
         clientSpy.complete(with: 200, data: jsonData)
-                    XCTAssertTrue(capturedErrors.isEmpty)
+        XCTAssertTrue(capturedErrors.isEmpty)
     }
 }
 
@@ -129,7 +129,7 @@ private extension RemoteFeedLoaderTests {
         let json = ["items": items]
         return try! JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed)
     }
-
+    
     private func failure(_ error: RemoteFeedLoader.Error) -> FeedLoader.Result {
         return .failure(error)
     }

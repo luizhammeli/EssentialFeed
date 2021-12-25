@@ -8,10 +8,6 @@
 import Foundation
 
 public typealias CachedFeed = (feed: [LocalFeedItem], timestamp: Date)
-//public enum CachedFeed {
-//    case empty
-//    case found([LocalFeedItem], timestamp: Date)
-//}
 
 public protocol FeedStore {
     typealias DeletionCompletion = (Error?) -> Void

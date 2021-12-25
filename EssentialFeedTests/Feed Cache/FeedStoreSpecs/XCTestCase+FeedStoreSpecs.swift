@@ -24,7 +24,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
                 XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
                 XCTAssertEqual(receivedDate, expectedDate, file: file, line: line)
                 
-            case (.success(nil), .success(nil)), (.failure, .failure): break
+            case (.success(.none), .success(.none)), (.failure, .failure): break
                 
             default:
                 XCTFail("Expected \(expectedResult) result got \(receivedResult) instead", file: file, line: line)
