@@ -18,6 +18,14 @@ func anyUniqueFeedImages() -> (models: [FeedImage], localModels: [LocalFeedItem]
     return (models, localModels)
 }
 
+func testSpecificStoreURL(fileName: String) -> URL {
+    return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(fileName).store")
+}
+
+func deletesTestCache(fileName: String) {
+    try? FileManager.default.removeItem(at: testSpecificStoreURL(fileName: fileName))
+}
+
 extension Date {
     func minusFeedCacheMaxAge() -> Date {
         add(days: -feedCacheMaxAgeInDays)
