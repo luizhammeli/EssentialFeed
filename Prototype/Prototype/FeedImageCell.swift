@@ -22,12 +22,12 @@ final class FeedImageCell: UITableViewCell {
         locationLabel.text = viewModel.location
         descriptionLabel.text = viewModel.description
         pinImage.isHidden = (viewModel.location == nil || viewModel.location?.isEmpty == true)
+        descriptionLabel.isHidden = viewModel.description == nil
         
         feedImageView.image = UIImage(named: viewModel.imageName)
         UIView.animate(withDuration: 0.4, delay: 0.3, options: .curveEaseOut) { [weak self] in
             self?.feedImageView.alpha = 1
         } completion: { _ in }
-
     }
     
     override func prepareForReuse() {
