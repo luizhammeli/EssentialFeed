@@ -48,7 +48,7 @@ final class FeedViewControllerTests: XCTestCase {
 }
 
 // MARK: - Helpers
-private extension EssentialFeediOSTests {
+private extension FeedViewControllerTests {
     func makeSUT() -> (FeedViewController, FeedLoaderSpy){
         let loader = FeedLoaderSpy()
         let sut = FeedViewController(loader: loader)
