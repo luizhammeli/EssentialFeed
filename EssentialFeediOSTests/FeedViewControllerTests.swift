@@ -1,5 +1,5 @@
 //
-//  EssentialFeediOSTests.swift
+//  FeedViewControllerTests.swift
 //  EssentialFeediOSTests
 //
 //  Created by Luiz Diniz Hammerli on 26/12/21.
@@ -9,7 +9,7 @@ import XCTest
 import EssentialFeed
 import EssentialFeediOS
 
-final class EssentialFeediOSTests: XCTestCase {
+final class FeedViewControllerTests: XCTestCase {
     func test_loadActions_loadsFeed() {
         let (sut, loader) = makeSUT()
 
