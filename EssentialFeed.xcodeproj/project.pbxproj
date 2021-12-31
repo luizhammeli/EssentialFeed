@@ -17,6 +17,7 @@
 		25283A53277F5869007FD979 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25CEC15C272C0300004BCFA9 /* EssentialFeed.framework */; platformFilter = ios; };
 		25283A54277F5869007FD979 /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25CEC15C272C0300004BCFA9 /* EssentialFeed.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		25283A58277F5C74007FD979 /* XCTestCase+MemoryLeakTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250AEAF7273CABCE004D423C /* XCTestCase+MemoryLeakTrack.swift */; };
+		25283A5A277F8510007FD979 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25283A59277F8510007FD979 /* FeedViewController.swift */; };
 		25354258275456A100037EC3 /* ValidadeCacheUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25354257275456A100037EC3 /* ValidadeCacheUseCaseTest.swift */; };
 		2535425A2759B2EC00037EC3 /* FeedCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253542592759B2EC00037EC3 /* FeedCachePolicy.swift */; };
 		253B9A842749264400F44E9E /* EssentialFeedAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253B9A832749264400F44E9E /* EssentialFeedAPIEndToEndTests.swift */; };
@@ -105,6 +106,7 @@
 		250AEAF9273CAC1F004D423C /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		25263808274FBF1400FB8DE1 /* FeedStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStoreSpy.swift; sourceTree = "<group>"; };
 		2526380B274FBFEC00FB8DE1 /* LoadFeedUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFeedUseCaseTests.swift; sourceTree = "<group>"; };
+		25283A59277F8510007FD979 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		25354257275456A100037EC3 /* ValidadeCacheUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidadeCacheUseCaseTest.swift; sourceTree = "<group>"; };
 		253542592759B2EC00037EC3 /* FeedCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCachePolicy.swift; sourceTree = "<group>"; };
 		253B9A812749264400F44E9E /* EssentialFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -251,6 +253,7 @@
 		259209EB2778850B00545388 /* EssentialFeediOS */ = {
 			isa = PBXGroup;
 			children = (
+				25283A59277F8510007FD979 /* FeedViewController.swift */,
 			);
 			path = EssentialFeediOS;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 					};
 					259209E92778850B00545388 = {
 						CreatedOnToolsVersion = 13.2.1;
+						LastSwiftMigration = 1320;
 					};
 					259209F02778850B00545388 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -590,6 +594,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25283A5A277F8510007FD979 /* FeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +735,7 @@
 		259209FA2778850B00545388 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -752,6 +758,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -760,6 +767,7 @@
 		259209FB2778850B00545388 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -791,6 +799,7 @@
 		259209FD2778850B00545388 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M2DD4Z95YZ;
@@ -809,6 +818,7 @@
 		259209FE2778850B00545388 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M2DD4Z95YZ;

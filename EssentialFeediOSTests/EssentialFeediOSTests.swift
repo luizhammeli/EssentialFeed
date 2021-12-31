@@ -7,43 +7,20 @@
 
 import XCTest
 import EssentialFeed
-//import EssentialFeediOS
-
-final class FeedViewController: UITableViewController {
-    private var loader: FeedLoader? = nil
-    
-    convenience init(loader: FeedLoader) {
-        self.init()
-        self.loader = loader
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupRefreshControl()
-        loadFeed()
-    }
-    
-    @objc private func loadFeed() {
-        refreshControl?.beginRefreshing()
-        loader?.load(completion: { [weak self] _ in
-            self?.refreshControl?.endRefreshing()
-        })
-    }
-    
-    private func setupRefreshControl() {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(loadFeed), for: .valueChanged)
-        tableView.refreshControl = refreshControl
-    }
-}
+import EssentialFeediOS
 
 final class EssentialFeediOSTests: XCTestCase {
-    func test_viewDidLoad_shouldCallLoadAfterLoadedView() {
+    func test_loadActions_loadsFeed() {
         let (sut, loader) = makeSUT()
+
         sut.loadViewIfNeeded()
-        
         XCTAssertEqual(loader.messagesCount, 1)
-        XCTAssertTrue(sut.isShowingLoadingIndicator)
+        
+        sut.simulateUserInitiatedFeedReload()
+        XCTAssertEqual(loader.messagesCount, 2)
+        
+        sut.simulateUserInitiatedFeedReload()
+        XCTAssertEqual(loader.messagesCount, 3)
     }
     
     func test_viewDidLoad_showsLoadingIndicator() {
@@ -53,41 +30,19 @@ final class EssentialFeediOSTests: XCTestCase {
         XCTAssertTrue(sut.isShowingLoadingIndicator)
     }
     
-    func test_viewDidLoad_hidesLoadingIndicatorOnLoaderCompletion() {
-        let (sut, loader) = makeSUT()
-        sut.loadViewIfNeeded()
-        
-        loader.complete()
-        XCTAssertFalse(sut.isShowingLoadingIndicator)
-    }
-    
-    func test_userInitiatedFeedReload_loadsFeed() {
+    func test_loadingIndicator_hidesLoadingIndicatorOnLoaderCompletion() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        XCTAssertEqual(loader.messagesCount, 1)
-        
-        sut.simulateUserInitiatedReload()
-        XCTAssertEqual(loader.messagesCount, 2)
-        
-        sut.simulateUserInitiatedReload()
-        XCTAssertEqual(loader.messagesCount, 3)
-    }
-    
-    func test_userInitiatedFeedReload_showsLoadingIndicator() {
-        let (sut, _) = makeSUT()
-        
-        sut.simulateUserInitiatedReload()
-
         XCTAssertTrue(sut.isShowingLoadingIndicator)
-    }
-    
-    func test_userInitiatedFeedReload_hidesLoadingIndicatorOnLoaderCompletion() {
-        let (sut, loader) = makeSUT()
-                
-        sut.simulateUserInitiatedReload()
-        loader.complete()
         
+        loader.completeFeedLoader(at: 0)
+        XCTAssertFalse(sut.isShowingLoadingIndicator)
+        
+        sut.simulateUserInitiatedFeedReload()
+        XCTAssertTrue(sut.isShowingLoadingIndicator)
+        
+        loader.completeFeedLoader(at: 1)
         XCTAssertFalse(sut.isShowingLoadingIndicator)
     }
 }
@@ -106,7 +61,7 @@ private extension EssentialFeediOSTests {
 }
 
 private extension FeedViewController {
-    func simulateUserInitiatedReload() {
+    func simulateUserInitiatedFeedReload() {
         refreshControl?.simulatePullToRefresh()
     }
     
@@ -126,8 +81,8 @@ private class FeedLoaderSpy: FeedLoader {
         loadCompletionMessages.append(completion)
     }
     
-    func complete(with result: FeedLoader.Result = .success([]), at index: Int = 0) {
-        loadCompletionMessages[0](result)
+    func completeFeedLoader(with result: FeedLoader.Result = .success([]), at index: Int = 0) {
+        loadCompletionMessages[index ](result)
     }
 }
 
