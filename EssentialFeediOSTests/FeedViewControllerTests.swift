@@ -23,14 +23,7 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.messagesCount, 3)
     }
     
-    func test_viewDidLoad_showsLoadingIndicator() {
-        let (sut, _) = makeSUT()
-        sut.loadViewIfNeeded()
-                
-        XCTAssertTrue(sut.isShowingLoadingIndicator)
-    }
-    
-    func test_loadingIndicator_hidesLoadingIndicatorOnLoaderCompletion() {
+    func test_loadingIndicator_isVisibleWhileLoadingFeed() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
@@ -42,8 +35,29 @@ final class FeedViewControllerTests: XCTestCase {
         sut.simulateUserInitiatedFeedReload()
         XCTAssertTrue(sut.isShowingLoadingIndicator)
         
-        loader.completeFeedLoader(at: 1)
+        loader.completeFeedLoader(with: .failure(anyNSError()), at: 1)
         XCTAssertFalse(sut.isShowingLoadingIndicator)
+    }
+    
+    func test_loadCompletion_() {
+        let (sut, loader) = makeSUT()
+        XCTAssertEqual(sut.numberOfRenderedFeedViews, 0)
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoader(with: .success([makeFeedImage(location: nil, description: nil)]))
+        XCTAssertEqual(sut.numberOfRenderedFeedViews, 1)
+        
+        
+        sut.simulateUserInitiatedFeedReload()
+        loader.completeFeedLoader(with: .success([makeFeedImage(location: nil, description: nil), makeFeedImage(location: nil, description: nil)]))
+        XCTAssertEqual(sut.numberOfRenderedFeedViews, 2)
+        
+        
+        sut.simulateUserInitiatedFeedReload()
+        loader.completeFeedLoader(with: .failure(anyNSError()))
+        XCTAssertEqual(sut.numberOfRenderedFeedViews, 2)
+        
+        XCTAssertNotNil(sut.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))        
     }
 }
 
@@ -58,6 +72,10 @@ private extension FeedViewControllerTests {
         
         return (sut, loader)
     }
+    
+    func makeFeedImage(location: String?, description: String?) -> FeedImage {
+        return FeedImage(id: UUID(), url: URL(string: "http://www.test.com")!, description: description, location: location)
+    }
 }
 
 private extension FeedViewController {
@@ -68,6 +86,12 @@ private extension FeedViewController {
     var isShowingLoadingIndicator: Bool {
         refreshControl!.isRefreshing
     }
+    
+    var numberOfRenderedFeedViews: Int {
+        tableView.numberOfRows(inSection: feedImageSection)
+    }
+    
+    var feedImageSection: Int { 0 }
 }
 
 private class FeedLoaderSpy: FeedLoader {
@@ -82,7 +106,7 @@ private class FeedLoaderSpy: FeedLoader {
     }
     
     func completeFeedLoader(with result: FeedLoader.Result = .success([]), at index: Int = 0) {
-        loadCompletionMessages[index ](result)
+        loadCompletionMessages[index](result)
     }
 }
 
