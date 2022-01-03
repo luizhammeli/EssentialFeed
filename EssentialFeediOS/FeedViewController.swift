@@ -45,6 +45,10 @@ public final class FeedViewController: UITableViewController {
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return FeedImageCell()
+        let cell = FeedImageCell()
+        cell.locationLabel.text = tableModel[indexPath.item].location
+        cell.descriptionLabel.text = tableModel[indexPath.item].description
+        cell.locationLabel.isHidden = tableModel[indexPath.item].location == nil
+        return cell
     }
 }
