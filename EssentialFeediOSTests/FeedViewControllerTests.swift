@@ -14,13 +14,13 @@ final class FeedViewControllerTests: XCTestCase {
         let (sut, loader) = makeSUT()
 
         sut.loadViewIfNeeded()
-        XCTAssertEqual(loader.messagesCount, 1)
+        XCTAssertEqual(loader.loadCompletionMessagesCount, 1)
         
         sut.simulateUserInitiatedFeedReload()
-        XCTAssertEqual(loader.messagesCount, 2)
+        XCTAssertEqual(loader.loadCompletionMessagesCount, 2)
         
         sut.simulateUserInitiatedFeedReload()
-        XCTAssertEqual(loader.messagesCount, 3)
+        XCTAssertEqual(loader.loadCompletionMessagesCount, 3)
     }
     
     func test_loadingIndicator_isVisibleWhileLoadingFeed() {
@@ -49,17 +49,123 @@ final class FeedViewControllerTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         loader.completeFeedLoader(with: .success([image0]))
-        assert(sut: sut, with: [image0])
-        
-        
+        assertThat(sut: sut, isRendering: [image0])
+                
         sut.simulateUserInitiatedFeedReload()
-        loader.completeFeedLoader(with: .success([image0, image1, image2]))
-        assert(sut: sut, with: [image0, image1, image2])
+        loader.completeFeedLoader(with: .success([image0, image1, image2]), at: 1)
+        assertThat(sut: sut, isRendering: [image0, image1, image2])
+    }
+    
+    func test_loadCompletion_doesNotAlterCurrentRenderingStateOnError() {
+        let (sut, loader) = makeSUT()
         
+        let image0 = makeFeedImage(location: "Location 1", description: "Description 1")
         
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoader(with: .success([image0]))
+        assertThat(sut: sut, isRendering: [image0])
+                
         sut.simulateUserInitiatedFeedReload()
-        loader.completeFeedLoader(with: .failure(anyNSError()))
-        assert(sut: sut, with: [image0, image1, image2])
+        loader.completeFeedLoader(with: .failure(anyNSError()), at: 1)
+        assertThat(sut: sut, isRendering: [image0])
+    }
+    
+    func test_loadImageData_loadsImageWhenIsVisible() {
+        let (sut, loader) = makeSUT()
+        let url0 = URL(string: "http://image0.com")!
+        let url1 = URL(string: "http://image1.com")!
+        
+        let image0 = makeFeedImage(location: nil, description: nil, url: url0)
+        let image1 = makeFeedImage(location: nil, description: nil, url: url1)
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoader(with: .success([image0, image1]))
+        sut.feedImageView(at: 0)
+        
+        XCTAssertEqual(loader.loadImagesURLs, [url0])
+        sut.feedImageView(at: 1)
+        
+        XCTAssertEqual(loader.loadImagesURLs, [url0, url1])
+    }
+    
+    func test_loadImageData_cancelsImageLoadingWhenNotVisibleAnymore() {
+        let (sut, loader) = makeSUT()
+        
+        let image0 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image0.com")!)
+        let image1 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image1.com")!)
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoader(with: .success([image0, image1]))
+        XCTAssertEqual(loader.canceledTasks, [])
+        
+        sut.simulateImageNotVisible(at: 0)
+        XCTAssertEqual(loader.canceledTasks, [image0.url])
+                
+        sut.simulateImageNotVisible(at: 1)
+        XCTAssertEqual(loader.canceledTasks, [image0.url, image1.url])
+    }
+    
+    func test_feedImageLoadingIndicator_isVisibleWhileLoadingImage() {
+        let (sut, loader) = makeSUT()
+        
+        let image0 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image0.com")!)
+        let image1 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image1.com")!)
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoader(with: .success([image0, image1]))
+        
+        let view = sut.simulateImageViewVisible(at: 0)
+        XCTAssertTrue(view!.isShowingLoadingIndicator)
+        
+        loader.completeImageLoading(with: .success(anyData()))
+        XCTAssertFalse(view!.isShowingLoadingIndicator)
+        
+        let view2 = sut.simulateImageViewVisible(at: 1)
+        XCTAssertTrue(view2!.isShowingLoadingIndicator)
+        
+        loader.completeImageLoading(with: .failure(anyNSError()), at: 1)
+        XCTAssertFalse(view2!.isShowingLoadingIndicator)
+    }
+    
+    func test_feedImageView_rendersImageLoadedFromURL() {
+        let (sut, loader) = makeSUT()
+        
+        let image0 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image0.com")!)
+        let image1 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image1.com")!)
+        
+        let imageData0 = UIImage.make(withColor: .red).pngData()!
+        let imageData1 = UIImage.make(withColor: .blue).pngData()!
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoader(with: .success([image0, image1]))
+        
+        let view = sut.simulateImageViewVisible(at: 0)
+        loader.completeImageLoading(with: .success(imageData0), at: 0)
+        XCTAssertEqual(imageData0, view?.feedImageData)
+        
+        let view1 = sut.simulateImageViewVisible(at: 1)
+        loader.completeImageLoading(with: .success(imageData1), at: 1)
+        XCTAssertEqual(imageData1, view1?.feedImageData)
+    }
+    
+    func test_feedImageView_() {
+        let (sut, loader) = makeSUT()
+        
+        let image0 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image0.com")!)
+        let image1 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image1.com")!)
+        
+        let imageData0 = UIImage.make(withColor: .red).pngData()!
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoader(with: .success([image0, image1]))
+        
+        let view = sut.simulateImageViewVisible(at: 0)
+        loader.completeImageLoading(with: .success(imageData0), at: 0)
+        XCTAssertFalse(view!.isShowingRetryButton)
+        
+        let view1 = sut.simulateImageViewVisible(at: 1)
+        loader.completeImageLoading(with: .failure(anyNSError()), at: 1)
+        XCTAssertTrue(view1!.isShowingRetryButton)
     }
 }
 
@@ -67,7 +173,7 @@ final class FeedViewControllerTests: XCTestCase {
 private extension FeedViewControllerTests {
     func makeSUT() -> (FeedViewController, FeedLoaderSpy){
         let loader = FeedLoaderSpy()
-        let sut = FeedViewController(loader: loader)
+        let sut = FeedViewController(feedLoader: loader, imageDataLoader: loader)
         
         checkForMemoryLeaks(instance: sut)
         checkForMemoryLeaks(instance: loader)
@@ -75,11 +181,11 @@ private extension FeedViewControllerTests {
         return (sut, loader)
     }
     
-    func makeFeedImage(location: String?, description: String?) -> FeedImage {
-        return FeedImage(id: UUID(), url: URL(string: "http://www.test.com")!, description: description, location: location)
+    func makeFeedImage(location: String?, description: String?, url: URL = URL(string: "http://www.test.com")!) -> FeedImage {
+        return FeedImage(id: UUID(), url: url, description: description, location: location)
     }
     
-    func assert(sut: FeedViewController, with feedImage: [FeedImage], file: StaticString = #filePath, line: UInt = #line) {
+    func assertThat(sut: FeedViewController, isRendering feedImage: [FeedImage], file: StaticString = #filePath, line: UInt = #line) {
         XCTAssertEqual(sut.numberOfRenderedFeedViews, feedImage.count, file: file, line: line)
         feedImage.enumerated().forEach { assertThat(sut: sut, hasViewConfiguredFor: $1, at: $0, file: file, line: line) }
     }
@@ -87,7 +193,7 @@ private extension FeedViewControllerTests {
     private func assertThat(sut: FeedViewController, hasViewConfiguredFor feedImage: FeedImage, at index: Int, file: StaticString = #filePath, line: UInt = #line) {
         let view = sut.feedImageView(at: index)
         
-        guard let cell = view as? FeedImageCell else {
+        guard let cell = view else {
             XCTFail("Expected \(FeedImageCell.self) instance, instead got \(String(describing: view)) instance")
             return
         }
@@ -106,10 +212,22 @@ private extension FeedViewController {
         refreshControl?.simulatePullToRefresh()
     }
     
-    func feedImageView(at index: Int) -> UITableViewCell? {
+    @discardableResult
+    func simulateImageViewVisible(at index: Int) -> FeedImageCell? {
+        feedImageView(at: index)
+    }
+    
+    func simulateImageNotVisible(at index: Int) {
+        let indexPath = IndexPath(row: index, section: 0)
+        let view = simulateImageViewVisible(at: index)!
+        tableView(tableView, didEndDisplaying: view, forRowAt: indexPath)
+    }
+    
+    @discardableResult
+    func feedImageView(at index: Int) -> FeedImageCell? {
         let ds = tableView.dataSource
         let indexPath = IndexPath(row: index, section: feedImageSection)
-        return (ds?.tableView(tableView, cellForRowAt: indexPath))
+        return ds?.tableView(tableView, cellForRowAt: indexPath) as? FeedImageCell
     }
     
     var isShowingLoadingIndicator: Bool {
@@ -135,12 +253,25 @@ private extension FeedImageCell {
     var locationText: String? {
         locationLabel.text
     }
+    
+    var isShowingLoadingIndicator: Bool {
+        feedImageContainer.isShimmering
+    }
+    
+    var feedImageData: Data? {
+        return feedImageView.image?.pngData()
+    }
+    
+    var isShowingRetryButton: Bool {
+        return !retryButton.isHidden
+    }
 }
 
-private class FeedLoaderSpy: FeedLoader {
+private class FeedLoaderSpy: FeedLoader, FeedImageDataLoader {
+    // MARK: - FeedLoader
     private var loadCompletionMessages = [(FeedLoader.Result) -> Void]()
     
-    var messagesCount: Int {
+    var loadCompletionMessagesCount: Int {
         loadCompletionMessages.count
     }
     
@@ -151,6 +282,31 @@ private class FeedLoaderSpy: FeedLoader {
     func completeFeedLoader(with result: FeedLoader.Result = .success([]), at index: Int = 0) {
         loadCompletionMessages[index](result)
     }
+    
+    // MARK: - FeedImageDataLoaderTask
+    private(set) var canceledTasks = [URL]()
+    private struct LoadImageTaskSpy: FeedImageDataLoaderTask {
+        let completion: (() -> Void)
+        
+        func cancel() {
+            completion()
+        }
+    }
+    
+    // MARK: - FeedImageDataLoader
+    var loadImagesURLs: [URL] {
+        return feedImageDataCompletions.map { $0.url }
+    }
+    private(set) var feedImageDataCompletions = [(url: URL, completion: ((Swift.Result<Data, Error>) -> Void))]()
+
+    func loadFeedImageData(from url: URL, completion: @escaping (Result<Data, Error>) -> Void) -> FeedImageDataLoaderTask {
+        feedImageDataCompletions.append((url, completion))
+        return LoadImageTaskSpy { [weak self] in self?.canceledTasks.append(url) }
+    }
+    
+    func completeImageLoading(with result: Swift.Result<Data, Error>, at index: Int = 0) {
+        feedImageDataCompletions[index].completion(result)
+    }
 }
 
 private extension UIRefreshControl {
@@ -160,3 +316,16 @@ private extension UIRefreshControl {
         }
     }
 }
+
+private extension UIImage {
+     static func make(withColor color: UIColor) -> UIImage {
+         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+         UIGraphicsBeginImageContext(rect.size)
+         let context = UIGraphicsGetCurrentContext()!
+         context.setFillColor(color.cgColor)
+         context.fill(rect)
+         let img = UIGraphicsGetImageFromCurrentImageContext()
+         UIGraphicsEndImageContext()
+         return img!
+     }
+ }

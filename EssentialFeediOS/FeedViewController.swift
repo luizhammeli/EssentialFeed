@@ -8,13 +8,24 @@
 import UIKit
 import EssentialFeed
 
+public protocol FeedImageDataLoaderTask {
+    func cancel()
+}
+
+public protocol FeedImageDataLoader {
+    func loadFeedImageData(from url: URL, completion: @escaping (Result<Data, Error>) -> Void) -> FeedImageDataLoaderTask
+}
+
 public final class FeedViewController: UITableViewController {
-    private var loader: FeedLoader? = nil
+    private var feedLoader: FeedLoader? = nil
+    private var imageDataLoader: FeedImageDataLoader? = nil
     private var tableModel = [FeedImage]()
+    private var imageDataTasks = [URL: FeedImageDataLoaderTask]()
     
-    public convenience init(loader: FeedLoader) {
+    public convenience init(feedLoader: FeedLoader, imageDataLoader: FeedImageDataLoader?) {
         self.init()
-        self.loader = loader
+        self.feedLoader = feedLoader
+        self.imageDataLoader = imageDataLoader
     }
     
     public override func viewDidLoad() {
@@ -25,7 +36,7 @@ public final class FeedViewController: UITableViewController {
     
     @objc private func loadFeed() {
         refreshControl?.beginRefreshing()
-        loader?.load(completion: { [weak self] result in
+        feedLoader?.load(completion: { [weak self] result in
             if let feedImage = try? result.get() {
                 self?.tableModel = feedImage
                 self?.tableView.reloadData()
@@ -46,9 +57,23 @@ public final class FeedViewController: UITableViewController {
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = FeedImageCell()
+        
+        cell.locationLabel.isHidden = tableModel[indexPath.item].location == nil
         cell.locationLabel.text = tableModel[indexPath.item].location
         cell.descriptionLabel.text = tableModel[indexPath.item].description
-        cell.locationLabel.isHidden = tableModel[indexPath.item].location == nil
+        
+        let url = tableModel[indexPath.item].url
+        cell.feedImageContainer.startShimmering()
+        imageDataTasks[url] = imageDataLoader?.loadFeedImageData(from: url) { [weak cell] result in
+            cell?.feedImageView.image = (try? UIImage(data: result.get())) ?? nil
+            cell?.feedImageContainer.stopShimmering()
+            cell?.retryButton.isHidden = !(cell?.feedImageView.image == nil)
+        }
         return cell
+    }
+    
+    public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let url = tableModel[indexPath.item].url
+        imageDataTasks[url]?.cancel()
     }
 }
