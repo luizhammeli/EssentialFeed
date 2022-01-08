@@ -61,6 +61,7 @@ public final class FeedViewController: UITableViewController {
         cell.locationLabel.isHidden = tableModel[indexPath.item].location == nil
         cell.locationLabel.text = tableModel[indexPath.item].location
         cell.descriptionLabel.text = tableModel[indexPath.item].description
+        cell.retryButton.isHidden = true
         
         let url = tableModel[indexPath.item].url
         cell.feedImageContainer.startShimmering()
@@ -68,6 +69,13 @@ public final class FeedViewController: UITableViewController {
             cell?.feedImageView.image = (try? UIImage(data: result.get())) ?? nil
             cell?.feedImageContainer.stopShimmering()
             cell?.retryButton.isHidden = !(cell?.feedImageView.image == nil)
+        }
+        cell.retryAction = { [weak self] in
+            _ = self?.imageDataLoader?.loadFeedImageData(from: url) { [weak cell] result in
+                cell?.feedImageView.image = (try? UIImage(data: result.get())) ?? nil
+                cell?.feedImageContainer.stopShimmering()
+                cell?.retryButton.isHidden = !(cell?.feedImageView.image == nil)
+            }
         }
         return cell
     }

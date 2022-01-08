@@ -148,24 +148,67 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(imageData1, view1?.feedImageData)
     }
     
-    func test_feedImageView_() {
+    func test_feedImageViewRetryButton_isVisibleOnImageURLLoadError() {
         let (sut, loader) = makeSUT()
         
-        let image0 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image0.com")!)
-        let image1 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image1.com")!)
-        
-        let imageData0 = UIImage.make(withColor: .red).pngData()!
-        
         sut.loadViewIfNeeded()
-        loader.completeFeedLoader(with: .success([image0, image1]))
+        loader.completeFeedLoader(with: .success([makeFeedImage(), makeFeedImage()]))
         
         let view = sut.simulateImageViewVisible(at: 0)
+        let view1 = sut.simulateImageViewVisible(at: 1)
+        
+        let imageData0 = UIImage.make(withColor: .red).pngData()!
         loader.completeImageLoading(with: .success(imageData0), at: 0)
         XCTAssertFalse(view!.isShowingRetryButton)
+        XCTAssertFalse(view1!.isShowingRetryButton)
         
-        let view1 = sut.simulateImageViewVisible(at: 1)
         loader.completeImageLoading(with: .failure(anyNSError()), at: 1)
+        XCTAssertFalse(view!.isShowingRetryButton)
         XCTAssertTrue(view1!.isShowingRetryButton)
+    }
+    
+    func test_feedImageViewRetryButton_isVisibleOnInvalidLoadedImageData() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoader(with: .success([makeFeedImage(), makeFeedImage()]))
+        
+        let view = sut.simulateImageViewVisible(at: 0)
+        let view1 = sut.simulateImageViewVisible(at: 1)
+        
+        let imageData0 = UIImage.make(withColor: .red).pngData()!
+        loader.completeImageLoading(with: .success(imageData0), at: 0)
+        XCTAssertFalse(view!.isShowingRetryButton)
+        XCTAssertFalse(view1!.isShowingRetryButton)
+        
+        loader.completeImageLoading(with: .success(anyData()), at: 1)
+        XCTAssertFalse(view!.isShowingRetryButton)
+        XCTAssertTrue(view1!.isShowingRetryButton)
+    }
+    
+    func test_feedImageViewRetryButton_() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoader(with: .success([makeFeedImage(), makeFeedImage()]))
+        
+        let view = sut.simulateImageViewVisible(at: 0)
+        let view1 = sut.simulateImageViewVisible(at: 1)
+        
+        let imageData0 = UIImage.make(withColor: .red).pngData()!
+        let imageData1 = UIImage.make(withColor: .red).pngData()!
+        
+        loader.completeImageLoading(with: .success(imageData0), at: 0)
+        XCTAssertFalse(view!.isShowingRetryButton)
+        XCTAssertFalse(view1!.isShowingRetryButton)
+        
+        loader.completeImageLoading(with: .failure(anyNSError()), at: 1)
+        XCTAssertFalse(view!.isShowingRetryButton)
+        XCTAssertTrue(view1!.isShowingRetryButton)
+        
+        view1?.simulateRetryAction()
+        loader.completeImageLoading(with: .success(imageData1), at: 2)
+        XCTAssertFalse(view1!.isShowingRetryButton)        
     }
 }
 
@@ -181,7 +224,7 @@ private extension FeedViewControllerTests {
         return (sut, loader)
     }
     
-    func makeFeedImage(location: String?, description: String?, url: URL = URL(string: "http://www.test.com")!) -> FeedImage {
+    func makeFeedImage(location: String? = nil, description: String? = nil, url: URL = URL(string: "http://www.test.com")!) -> FeedImage {
         return FeedImage(id: UUID(), url: url, description: description, location: location)
     }
     
@@ -265,6 +308,10 @@ private extension FeedImageCell {
     var isShowingRetryButton: Bool {
         return !retryButton.isHidden
     }
+    
+    func simulateRetryAction() {
+        retryButton.simulateTap()
+    }
 }
 
 private class FeedLoaderSpy: FeedLoader, FeedImageDataLoader {
@@ -316,6 +363,16 @@ private extension UIRefreshControl {
         }
     }
 }
+
+private extension UIButton {
+     func simulateTap() {
+         allTargets.forEach { target in
+             actions(forTarget: target, forControlEvent: .touchUpInside)?.forEach {
+                 (target as NSObject).perform(Selector($0))
+             }
+         }
+     }
+ }
 
 private extension UIImage {
      static func make(withColor color: UIColor) -> UIImage {

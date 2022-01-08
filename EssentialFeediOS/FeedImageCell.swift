@@ -12,5 +12,15 @@ public final class FeedImageCell: UITableViewCell {
     public let locationLabel = UILabel()
     public let feedImageView = UIImageView()
     public let feedImageContainer = UIView()
-    public let retryButton = UIButton()
+    public lazy var retryButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(didPressRetryButton), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc private func didPressRetryButton() {
+        retryAction?()
+    }
+    
+    var retryAction: (() -> Void)?
 }
