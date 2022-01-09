@@ -186,29 +186,28 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertTrue(view1!.isShowingRetryButton)
     }
     
-    func test_feedImageViewRetryButton_() {
+    func test_feedImageViewRetryButton_retriesImageLoad() {
         let (sut, loader) = makeSUT()
         
+        let image0 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image0.com")!)
+        let image1 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image1.com")!)
+        
         sut.loadViewIfNeeded()
-        loader.completeFeedLoader(with: .success([makeFeedImage(), makeFeedImage()]))
+        loader.completeFeedLoader(with: .success([image0, image1]))
         
         let view = sut.simulateImageViewVisible(at: 0)
         let view1 = sut.simulateImageViewVisible(at: 1)
-        
-        let imageData0 = UIImage.make(withColor: .red).pngData()!
-        let imageData1 = UIImage.make(withColor: .red).pngData()!
-        
-        loader.completeImageLoading(with: .success(imageData0), at: 0)
-        XCTAssertFalse(view!.isShowingRetryButton)
-        XCTAssertFalse(view1!.isShowingRetryButton)
-        
+        XCTAssertEqual(loader.loadImagesURLs, [image0.url, image1.url])
+                
+        loader.completeImageLoading(with: .failure(anyNSError()), at: 0)
         loader.completeImageLoading(with: .failure(anyNSError()), at: 1)
-        XCTAssertFalse(view!.isShowingRetryButton)
-        XCTAssertTrue(view1!.isShowingRetryButton)
+        XCTAssertEqual(loader.loadImagesURLs, [image0.url, image1.url])
+        
+        view?.simulateRetryAction()
+        XCTAssertEqual(loader.loadImagesURLs, [image0.url, image1.url, image0.url])
         
         view1?.simulateRetryAction()
-        loader.completeImageLoading(with: .success(imageData1), at: 2)
-        XCTAssertFalse(view1!.isShowingRetryButton)        
+        XCTAssertEqual(loader.loadImagesURLs, [image0.url, image1.url, image0.url, image1.url])
     }
 }
 
