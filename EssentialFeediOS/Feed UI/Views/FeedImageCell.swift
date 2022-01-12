@@ -19,8 +19,8 @@ public final class FeedImageCell: UITableViewCell {
     }()
     
     @objc private func didPressRetryButton() {
-        retryAction?()
+        onRetry?()
     }
     
-    var retryAction: (() -> Void)?
+    var onRetry: (() -> Void)?
 }
