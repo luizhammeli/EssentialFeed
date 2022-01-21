@@ -8,32 +8,32 @@
 import Foundation
 import EssentialFeed
 
-protocol FeedLoadingView {
-    func onChange(isLoading: Bool)
+protocol FeedLoadingView: AnyObject {
+    func display(isLoading: Bool)
 }
 
 protocol FeedView {
-    func onFeedLoad(feedItem: [FeedImage])
+    func display(feedItem: [FeedImage])
 }
 
 public final class FeedViewPresenter {
     typealias Observer<T> = (T) -> Void
     private let feedLoader: FeedLoader
+    var loadingView: FeedLoadingView?
+    var feedView: FeedView?
+    
 
     public init(feedLoader: FeedLoader) {
         self.feedLoader = feedLoader
     }
     
-    var feedLoadingView: FeedLoadingView?
-    var feedView: FeedView?
-    
     @objc func load() {
-        feedLoadingView?.onChange(isLoading: true)
+        loadingView?.display(isLoading: true)
         feedLoader.load(completion: { [weak self] result in
             if let feedImage = try? result.get() {
-                self?.feedView?.onFeedLoad(feedItem: feedImage)
+                self?.feedView?.display(feedItem: feedImage)
             }
-            self?.feedLoadingView?.onChange(isLoading: false)
+            self?.loadingView?.display(isLoading: false)
         })
     }
 }

@@ -16,14 +16,27 @@ public final class FeedUIComposer {
         let feedRefreshController = FeedRefreshViewController(presenter: feedViewPresenter)
         let feedViewController = FeedViewController(refreshController: feedRefreshController)
         
-        feedViewPresenter.feedLoadingView = feedRefreshController
-        feedViewPresenter.feedView = FeedoCellControllerAdapter(controller: feedViewController, imageLoader: imageLoader)
+        feedViewPresenter.loadingView = WeakRefVirtualProxy(instance: feedRefreshController)
+        feedViewPresenter.feedView = FeedViewAdapter(controller: feedViewController, imageLoader: imageLoader)
         return feedViewController
     }
 }
 
-final class FeedoCellControllerAdapter {
-    private let controller: FeedViewController?
+private final class WeakRefVirtualProxy<T: AnyObject> {
+    private weak var instance: T?
+    init(instance: T) {
+        self.instance = instance
+    }
+}
+
+extension WeakRefVirtualProxy: FeedLoadingView where T: FeedLoadingView {
+    func display(isLoading: Bool) {
+        instance?.display(isLoading: isLoading)
+    }
+}
+
+final class FeedViewAdapter {
+    private weak var controller: FeedViewController?
     private let imageLoader: FeedImageDataLoader
     
     init(controller: FeedViewController, imageLoader: FeedImageDataLoader) {
@@ -38,8 +51,8 @@ final class FeedoCellControllerAdapter {
     }
 }
 
-extension FeedoCellControllerAdapter: FeedView {
-    func onFeedLoad(feedItem: [FeedImage]) {
+extension FeedViewAdapter: FeedView {
+    func display(feedItem: [FeedImage]) {
         adaptToCellControllers(feedImage: feedItem)
     }
 }
