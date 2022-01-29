@@ -12,8 +12,9 @@ public final class FeedUIComposer {
     private init() {}
     
     public static func compose(with feedLoader: FeedLoader, imageLoader: FeedImageDataLoader) -> FeedViewController {
-        let feedViewPresenter = FeedViewPresenter(feedLoader: feedLoader)
-        let feedRefreshController = FeedRefreshViewController(presenter: feedViewPresenter)
+        let feedViewPresenter = FeedViewPresenter()
+        let presentationAdapter = FeedLoaderPresentationAdapter(feedLoader: feedLoader, feedPresenter: feedViewPresenter)
+        let feedRefreshController = FeedRefreshViewController(delegate: presentationAdapter)
         let feedViewController = FeedViewController(refreshController: feedRefreshController)
         
         feedViewPresenter.loadingView = WeakRefVirtualProxy(instance: feedRefreshController)
@@ -30,8 +31,8 @@ private final class WeakRefVirtualProxy<T: AnyObject> {
 }
 
 extension WeakRefVirtualProxy: FeedLoadingView where T: FeedLoadingView {
-    func display(isLoading: Bool) {
-        instance?.display(isLoading: isLoading)
+    func display(viewModel: FeedLoadingViewModel) {
+        instance?.display(viewModel: viewModel)
     }
 }
 
@@ -45,14 +46,16 @@ final class FeedViewAdapter {
     }
     
     func adaptToCellControllers(feedImage: [FeedImage]) {
-        controller?.tableModel = feedImage.map { FeedImageCellController(viewModel: FeedImageCellViewModel(model: $0,
-                                                                                                           imageLoader: imageLoader,
-                                                                                                           imageTransformer: UIImage.init)) }
+        controller?.tableModel = feedImage.map {
+            FeedImageCellController(viewModel: FeedImageCellViewModel(model: $0,
+                                                                      imageLoader: imageLoader,
+                                                                      imageTransformer: UIImage.init))
+        }
     }
 }
 
 extension FeedViewAdapter: FeedView {
-    func display(feedItem: [FeedImage]) {
-        adaptToCellControllers(feedImage: feedItem)
+    func display(viewModel: FeedViewModel) {
+        adaptToCellControllers(feedImage: viewModel.feedItem)
     }
 }
