@@ -39,6 +39,6 @@ public final class FeedViewController: UITableViewController {
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        tableModel[indexPath.item].cancelTask()
+        tableModel[indexPath.item].cancelLoad()
     }
 }

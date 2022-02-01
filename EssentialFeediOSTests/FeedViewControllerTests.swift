@@ -177,10 +177,10 @@ final class FeedViewControllerTests: XCTestCase {
         let view1 = sut.simulateImageViewVisible(at: 1)
         
         let imageData0 = UIImage.make(withColor: .red).pngData()!
-        loader.completeImageLoading(with: .success(imageData0), at: 0)
         XCTAssertFalse(view!.isShowingRetryButton)
         XCTAssertFalse(view1!.isShowingRetryButton)
         
+        loader.completeImageLoading(with: .success(imageData0), at: 0)
         loader.completeImageLoading(with: .success(anyData()), at: 1)
         XCTAssertFalse(view!.isShowingRetryButton)
         XCTAssertTrue(view1!.isShowingRetryButton)

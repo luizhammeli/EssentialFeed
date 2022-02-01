@@ -33,7 +33,7 @@ public final class FeedRefreshViewController: NSObject {
 
 // MARK: - FeedLoadingView
 extension FeedRefreshViewController: FeedLoadingView {
-    func display(viewModel: FeedLoadingViewModel) {
+    public func display(viewModel: FeedLoadingViewModel) {
         if viewModel.isLoading {
             view.beginRefreshing()
         } else {
