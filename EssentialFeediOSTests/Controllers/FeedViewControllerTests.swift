@@ -7,7 +7,7 @@
 
 import XCTest
 import EssentialFeed
-import EssentialFeediOS
+@testable import EssentialFeediOS
 
 final class FeedViewControllerTests: XCTestCase {
     func test_loadActions_loadsFeed() {
@@ -209,6 +209,19 @@ final class FeedViewControllerTests: XCTestCase {
         view1?.simulateRetryAction()
         XCTAssertEqual(loader.loadImagesURLs, [image0.url, image1.url, image0.url, image1.url])
     }
+    
+    func test_() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoader(with: .success([makeFeedImage()]))
+        
+        sut.simulateImageViewVisible(at: 0)
+        let view = sut.simulateImageNotVisible(at: 0)
+                
+        loader.completeImageLoading(with: .success(anyImageData()), at: 0)
+        XCTAssertNil(view?.feedImageView.image)
+    }
 }
 
 // MARK: - Helpers
@@ -247,6 +260,10 @@ private extension FeedViewControllerTests {
         
         XCTAssertEqual(cell.locationText, feedImage.location, "Expected \(String(describing: feedImage.location)) location at \(index) index", file: file, line: line)
     }
+    
+    private func anyImageData() -> Data {
+        return UIImage.make(withColor: .blue).pngData()!
+    }
 }
 
 private extension FeedViewController {
@@ -259,10 +276,12 @@ private extension FeedViewController {
         feedImageView(at: index)
     }
     
-    func simulateImageNotVisible(at index: Int) {
+    @discardableResult
+    func simulateImageNotVisible(at index: Int) -> FeedImageCell? {
         let indexPath = IndexPath(row: index, section: 0)
         let view = simulateImageViewVisible(at: index)!
         tableView(tableView, didEndDisplaying: view, forRowAt: indexPath)
+        return view
     }
     
     @discardableResult

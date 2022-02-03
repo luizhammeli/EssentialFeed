@@ -10,19 +10,12 @@ import EssentialFeed
 
 public final class FeedViewController: UITableViewController {
     private var imageDataLoader: FeedImageDataLoader?
-    var tableModel = [FeedImageCellController]() {
-        didSet { tableView.reloadData() }
-    }
-    private var feedRefreshController: FeedRefreshViewController?
-    
-    convenience init(refreshController: FeedRefreshViewController) {
-        self.init()
-        self.feedRefreshController = refreshController
-    }
+    var feedRefreshController: FeedRefreshViewController?
+    var tableModel = [FeedImageCellController]() { didSet { tableView.reloadData() } }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        setupRefreshControl()
+        setupRefreshControl()        
     }
     
     private func setupRefreshControl() {
@@ -35,7 +28,7 @@ public final class FeedViewController: UITableViewController {
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableModel[indexPath.item].view()
+        return tableModel[indexPath.item].view(tableView: tableView)
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {

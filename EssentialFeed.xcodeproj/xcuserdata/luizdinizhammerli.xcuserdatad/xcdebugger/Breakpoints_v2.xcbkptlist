@@ -222,56 +222,11 @@
             filePath = "EssentialFeediOSTests/FeedViewControllerTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "test_loadImageData_loadsImageWhenIsVisible()"
             landmarkType = "7">
             <Locations>
-               <Location
-                  uuid = "336480F4-3DCA-4969-BB6D-7E264E4D81E1 - 2e1e8dadd0b3e71"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EssentialFeediOSTests.FeedViewControllerTests.test_() -&gt; ()"
-                  moduleName = "EssentialFeediOSTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "81"
-                  endingLineNumber = "81"
-                  offsetFromSymbolStart = "1016">
-               </Location>
-               <Location
-                  uuid = "336480F4-3DCA-4969-BB6D-7E264E4D81E1 - 2e1e8dadd0b3e12"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EssentialFeediOSTests.FeedViewControllerTests.test_() -&gt; ()"
-                  moduleName = "EssentialFeediOSTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "1080">
-               </Location>
-               <Location
-                  uuid = "336480F4-3DCA-4969-BB6D-7E264E4D81E1 - 2e1e8dadd0b3f8d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EssentialFeediOSTests.FeedViewControllerTests.test_() -&gt; ()"
-                  moduleName = "EssentialFeediOSTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "1720">
-               </Location>
                <Location
                   uuid = "336480F4-3DCA-4969-BB6D-7E264E4D81E1 - 1043e282ec8e0b22"
                   shouldBeEnabled = "Yes"
@@ -287,6 +242,21 @@
                   endingLineNumber = "85"
                   offsetFromSymbolStart = "1720">
                </Location>
+               <Location
+                  uuid = "336480F4-3DCA-4969-BB6D-7E264E4D81E1 - 1043e282ec8e0b01"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOSTests.FeedViewControllerTests.test_loadImageData_loadsImageWhenIsVisible() -&gt; ()"
+                  moduleName = "EssentialFeediOSTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "1720">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -300,56 +270,11 @@
             filePath = "EssentialFeediOSTests/FeedViewControllerTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "test_loadImageData_loadsImageWhenIsVisible()"
             landmarkType = "7">
             <Locations>
-               <Location
-                  uuid = "993F15D8-2903-4297-8253-9AFE111BE750 - 2e1e8dadd0b3e96"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EssentialFeediOSTests.FeedViewControllerTests.test_() -&gt; ()"
-                  moduleName = "EssentialFeediOSTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78"
-                  offsetFromSymbolStart = "740">
-               </Location>
-               <Location
-                  uuid = "993F15D8-2903-4297-8253-9AFE111BE750 - 2e1e8dadd0b3e96"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EssentialFeediOSTests.FeedViewControllerTests.test_() -&gt; ()"
-                  moduleName = "EssentialFeediOSTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78"
-                  offsetFromSymbolStart = "756">
-               </Location>
-               <Location
-                  uuid = "993F15D8-2903-4297-8253-9AFE111BE750 - 2e1e8dadd0b3e71"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EssentialFeediOSTests.FeedViewControllerTests.test_() -&gt; ()"
-                  moduleName = "EssentialFeediOSTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "81"
-                  endingLineNumber = "81"
-                  offsetFromSymbolStart = "1244">
-               </Location>
                <Location
                   uuid = "993F15D8-2903-4297-8253-9AFE111BE750 - 1043e282ec8e0ade"
                   shouldBeEnabled = "Yes"
@@ -365,7 +290,150 @@
                   endingLineNumber = "81"
                   offsetFromSymbolStart = "1244">
                </Location>
+               <Location
+                  uuid = "993F15D8-2903-4297-8253-9AFE111BE750 - 1043e282ec8e0abd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOSTests.FeedViewControllerTests.test_loadImageData_loadsImageWhenIsVisible() -&gt; ()"
+                  moduleName = "EssentialFeediOSTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "1244">
+               </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CADD7C14-E5AF-4F7B-8DD3-402B65B01D4F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeediOS/Feed UI/Controllers/FeedImageCellController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "display(model:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CADD7C14-E5AF-4F7B-8DD3-402B65B01D4F - 5f590d3edcb88972"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOS.FeedImageCellController.display(model: EssentialFeediOS.FeedCellViewModel&lt;__C.UIImage&gt;) -&gt; ()"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOS/Feed%20UI/Controllers/FeedImageCellController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "632">
+               </Location>
+               <Location
+                  uuid = "CADD7C14-E5AF-4F7B-8DD3-402B65B01D4F - 5f590d3edcb88913"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOS.FeedImageCellController.display(model: EssentialFeediOS.FeedCellViewModel&lt;__C.UIImage&gt;) -&gt; ()"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOS/Feed%20UI/Controllers/FeedImageCellController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "632">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D110FF8-E40D-4AEB-AAF4-3CD81790E6B5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeediOS/Feed UI/Controllers/FeedImageCellController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "display(model:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5D110FF8-E40D-4AEB-AAF4-3CD81790E6B5 - 5f590d3edcb88955"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOS.FeedImageCellController.display(model: EssentialFeediOS.FeedCellViewModel&lt;__C.UIImage&gt;) -&gt; ()"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOS/Feed%20UI/Controllers/FeedImageCellController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "200">
+               </Location>
+               <Location
+                  uuid = "5D110FF8-E40D-4AEB-AAF4-3CD81790E6B5 - 5f590d3edcb88972"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOS.FeedImageCellController.display(model: EssentialFeediOS.FeedCellViewModel&lt;__C.UIImage&gt;) -&gt; ()"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOS/Feed%20UI/Controllers/FeedImageCellController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "200">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0BC634C0-996A-455A-A4FD-D12CBA094808"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeediOS/Feed UI/Controllers/FeedViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "tableView(_:didEndDisplaying:forRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BEA9FD6B-1462-4438-BF38-49EB4D4A4012"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeediOSTests/Controllers/FeedViewControllerTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "feedImageView(at:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

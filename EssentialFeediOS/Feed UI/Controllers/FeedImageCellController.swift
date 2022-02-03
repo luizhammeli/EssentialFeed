@@ -14,41 +14,47 @@ protocol FeedImageCellControllerDelegate {
 
 final class FeedImageCellController {
     private var delegate: FeedImageCellControllerDelegate
-    private lazy var cell = FeedImageCell()
+    private var cell: FeedImageCell?
     
-    init(presentationAdapter: FeedImageCellControllerDelegate) {
-        self.delegate = presentationAdapter
+    init(delegate: FeedImageCellControllerDelegate) {
+        self.delegate = delegate
     }
     
-    func view() -> UITableViewCell {
+    func view(tableView: UITableView) -> UITableViewCell {
+        cell = tableView.dequeueReusableCell(withIdentifier: "FeedImageCell") as? FeedImageCell
         delegate.didRequestImage()
-        return cell
+        return cell!
     }
     
     func preload() {
          delegate.didRequestImage()
      }
 
-     func cancelLoad() {         
+     func cancelLoad() {
+         releaseCellForReuse() 
          delegate.didCancelImageRequest()
      }
+    
+    private func releaseCellForReuse() {
+        cell = nil
+    }
 }
 
 extension FeedImageCellController: FeedImageView {
     typealias Image = UIImage
     
     func display(model: FeedCellViewModel<UIImage>) {
-        cell.locationLabel.isHidden = model.locationIsHidden
-        cell.locationLabel.text = model.location
-        cell.descriptionLabel.text = model.description
-        cell.onRetry = delegate.didRequestImage
-        cell.feedImageView.image = model.image
-        cell.retryButton.isHidden = !model.shouldRetry
+        cell?.locationLabel.isHidden = model.locationIsHidden
+        cell?.locationLabel.text = model.location
+        cell?.descriptionLabel.text = model.description
+        cell?.onRetry = delegate.didRequestImage
+        cell?.feedImageView.image = model.image
+        cell?.retryButton.isHidden = !model.shouldRetry
         
         if model.isLoading {
-            cell.feedImageContainer.startShimmering()
+            cell?.feedImageContainer.startShimmering()
         } else {
-            cell.feedImageContainer.stopShimmering()
+            cell?.feedImageContainer.stopShimmering()
         }
     }
 }
