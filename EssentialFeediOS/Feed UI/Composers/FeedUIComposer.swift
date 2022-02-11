@@ -11,14 +11,12 @@ import UIKit
 public final class FeedUIComposer {
     private init() {}
     
-    public static func compose(with feedLoader: FeedLoader, imageLoader: FeedImageDataLoader) -> FeedViewController {
+    public static func feedCompose(with feedLoader: FeedLoader, imageLoader: FeedImageDataLoader) -> FeedViewController {
         let presentationAdapter = FeedLoaderPresentationAdapter(feedLoader: feedLoader)
         let feedRefreshController = FeedRefreshViewController(delegate: presentationAdapter)
         
-        let bundle = Bundle(for: FeedViewController.self)
-        let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
-        let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as! FeedViewController
-        feedViewController.feedRefreshController = feedRefreshController
+        let feedViewController = FeedViewController.makeWith(refreshController: feedRefreshController,
+                                                             title: FeedViewPresenter.title)
         
         let feedViewPresenter = FeedViewPresenter(loadingView: WeakRefVirtualProxy(instance: feedRefreshController),
                                                   feedView: FeedViewAdapter(controller: feedViewController,
@@ -27,6 +25,19 @@ public final class FeedUIComposer {
         return feedViewController
     }
 }
+
+extension FeedViewController {
+    public static func makeWith(refreshController: FeedRefreshViewController, title: String) -> FeedViewController {
+        let bundle = Bundle(for: FeedViewController.self)
+        let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
+        let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as! FeedViewController
+        feedViewController.feedRefreshController = refreshController
+        feedViewController.title = title
+        
+        return feedViewController
+    }
+}
+
 
 private final class WeakRefVirtualProxy<T: AnyObject> {
     private weak var instance: T?

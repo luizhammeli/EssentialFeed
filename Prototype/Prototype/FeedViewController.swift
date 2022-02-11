@@ -21,6 +21,6 @@ class FeedViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedImageCell
         cell.setData(viewModel: FeedImageViewModel.prototypeFeed[indexPath.row])
         return cell
-    }
+    }        
 }
 

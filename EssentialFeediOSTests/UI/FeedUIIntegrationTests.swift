@@ -1,5 +1,5 @@
 //
-//  FeedViewControllerTests.swift
+//  FeedUIIntegrationTests.swift
 //  EssentialFeediOSTests
 //
 //  Created by Luiz Diniz Hammerli on 26/12/21.
@@ -9,7 +9,13 @@ import XCTest
 import EssentialFeed
 @testable import EssentialFeediOS
 
-final class FeedViewControllerTests: XCTestCase {
+final class FeedUIIntegrationTests: XCTestCase {
+    func test_loadActions_showsTheCorrectTitle() {
+        let (sut, _) = makeSUT()
+                       
+        XCTAssertEqual(sut.title, localized(key: "FEED_VIEW_TITLE"))
+    }
+        
     func test_loadActions_loadsFeed() {
         let (sut, loader) = makeSUT()
 
@@ -225,10 +231,10 @@ final class FeedViewControllerTests: XCTestCase {
 }
 
 // MARK: - Helpers
-private extension FeedViewControllerTests {
+private extension FeedUIIntegrationTests {
     func makeSUT() -> (FeedViewController, FeedLoaderSpy){
         let loader = FeedLoaderSpy()
-        let sut = FeedUIComposer.compose(with: loader, imageLoader: loader)
+        let sut = FeedUIComposer.feedCompose(with: loader, imageLoader: loader)
         
         checkForMemoryLeaks(instance: sut)
         checkForMemoryLeaks(instance: loader)
@@ -263,6 +269,17 @@ private extension FeedViewControllerTests {
     
     private func anyImageData() -> Data {
         return UIImage.make(withColor: .blue).pngData()!
+    }
+    
+    private func localized(key: String, file: StaticString = #filePath, line: UInt = #line) -> String {
+        let bundle = Bundle(for: FeedViewPresenter.self)
+        let localizedTitle = bundle.localizedString(forKey: key, value: nil, table: "Feed")
+        
+        if localizedTitle == key {
+            XCTFail("Missing localized string for key: \(key)", file: file, line: line)
+        }
+        
+        return localizedTitle
     }
 }
 
@@ -329,48 +346,6 @@ private extension FeedImageCell {
     
     func simulateRetryAction() {
         retryButton.simulateTap()
-    }
-}
-
-private class FeedLoaderSpy: FeedLoader, FeedImageDataLoader {
-    // MARK: - FeedLoader
-    private var loadCompletionMessages = [(FeedLoader.Result) -> Void]()
-    
-    var loadCompletionMessagesCount: Int {
-        loadCompletionMessages.count
-    }
-    
-    func load(completion: @escaping (FeedLoader.Result) -> Void) {
-        loadCompletionMessages.append(completion)
-    }
-    
-    func completeFeedLoader(with result: FeedLoader.Result = .success([]), at index: Int = 0) {
-        loadCompletionMessages[index](result)
-    }
-    
-    // MARK: - FeedImageDataLoaderTask
-    private(set) var canceledTasks = [URL]()
-    private struct LoadImageTaskSpy: FeedImageDataLoaderTask {
-        let completion: (() -> Void)
-        
-        func cancel() {
-            completion()
-        }
-    }
-    
-    // MARK: - FeedImageDataLoader
-    var loadImagesURLs: [URL] {
-        return feedImageDataCompletions.map { $0.url }
-    }
-    private(set) var feedImageDataCompletions = [(url: URL, completion: ((Swift.Result<Data, Error>) -> Void))]()
-
-    func loadFeedImageData(from url: URL, completion: @escaping (Result<Data, Error>) -> Void) -> FeedImageDataLoaderTask {
-        feedImageDataCompletions.append((url, completion))
-        return LoadImageTaskSpy { [weak self] in self?.canceledTasks.append(url) }
-    }
-    
-    func completeImageLoading(with result: Swift.Result<Data, Error>, at index: Int = 0) {
-        feedImageDataCompletions[index].completion(result)
     }
 }
 

@@ -15,28 +15,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ywC-h1-o7Y">
-                            <rect key="frame" x="0.0" y="512" width="414" height="115"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <string key="text">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description
-Description Description Description Description Description Descriptio</string>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="445" id="TB5-M9-bJT" customClass="FeedImageCell" customModule="Prototype" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="445"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="600" id="TB5-M9-bJT" customClass="FeedImageCell" customModule="Prototype" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="600"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TB5-M9-bJT" id="kvb-lE-8jw">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="445"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Nrr-gC-iN4">
-                                            <rect key="frame" x="20" y="11" width="374" height="423"/>
+                                            <rect key="frame" x="20" y="11" width="374" height="578"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dtv-4k-hUR" userLabel="Location Container">
-                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="37"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="66"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin" translatesAutoresizingMaskIntoConstraints="NO" id="Q8X-xZ-nT2" userLabel="Pin Image">
                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -55,22 +46,43 @@ Label</string>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3sr-H0-7ws">
-                                                    <rect key="frame" x="0.0" y="49" width="374" height="374"/>
-                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NRf-Ib-xCU">
+                                                    <rect key="frame" x="0.0" y="78" width="374" height="373"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oxk-KT-Kz3">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="373"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="3sr-H0-7ws" secondAttribute="height" multiplier="1:1" id="XQc-AG-llX"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Oxk-KT-Kz3" secondAttribute="trailing" id="0kV-j7-Xr0"/>
+                                                        <constraint firstItem="Oxk-KT-Kz3" firstAttribute="centerY" secondItem="NRf-Ib-xCU" secondAttribute="centerY" id="OVQ-dL-Pio"/>
+                                                        <constraint firstItem="Oxk-KT-Kz3" firstAttribute="leading" secondItem="NRf-Ib-xCU" secondAttribute="leading" id="RKG-eN-tyJ"/>
+                                                        <constraint firstItem="Oxk-KT-Kz3" firstAttribute="top" secondItem="NRf-Ib-xCU" secondAttribute="top" id="Vp5-j8-dqh"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Oxk-KT-Kz3" secondAttribute="bottom" id="aye-qq-v27"/>
+                                                        <constraint firstAttribute="width" secondItem="NRf-Ib-xCU" secondAttribute="height" multiplier="1:1" constant="1" id="hqV-f7-f6V"/>
+                                                        <constraint firstItem="Oxk-KT-Kz3" firstAttribute="centerX" secondItem="NRf-Ib-xCU" secondAttribute="centerX" id="kV6-6K-PL5"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="22"/>
+                                                            <integer key="value" value="14"/>
                                                         </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
-                                                </imageView>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ywC-h1-o7Y">
+                                                    <rect key="frame" x="0.0" y="463" width="373" height="115"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <string key="text">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description
+Description Description Description Description Description Descriptio</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="dtv-4k-hUR" firstAttribute="width" secondItem="Nrr-gC-iN4" secondAttribute="width" id="6dz-oj-Zau"/>
-                                                <constraint firstItem="3sr-H0-7ws" firstAttribute="width" secondItem="Nrr-gC-iN4" secondAttribute="width" id="iUg-a3-a84"/>
+                                                <constraint firstAttribute="trailing" secondItem="NRf-Ib-xCU" secondAttribute="trailing" id="pfV-N8-zmN"/>
                                             </constraints>
                                         </stackView>
                                     </subviews>
@@ -81,9 +93,14 @@ Label</string>
                                         <constraint firstAttribute="bottomMargin" secondItem="Nrr-gC-iN4" secondAttribute="bottom" id="hL0-aT-asc"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="descriptionLabel" destination="ywC-h1-o7Y" id="DXe-kT-PbI"/>
-                                    <outlet property="feedImageView" destination="3sr-H0-7ws" id="mAD-go-SlY"/>
+                                    <outlet property="feedImageView" destination="Oxk-KT-Kz3" id="5Ov-b8-6wY"/>
                                     <outlet property="locationLabel" destination="5It-8E-ovg" id="3kY-8N-sX2"/>
                                     <outlet property="pinImage" destination="Q8X-xZ-nT2" id="pV5-ks-QA8"/>
                                 </connections>
@@ -121,9 +138,6 @@ Label</string>
     </scenes>
     <resources>
         <image name="pin" width="10" height="14"/>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

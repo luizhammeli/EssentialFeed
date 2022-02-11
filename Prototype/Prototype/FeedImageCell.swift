@@ -33,5 +33,6 @@ final class FeedImageCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         feedImageView.alpha = 0
+        
     }
 }

@@ -28,6 +28,12 @@ public final class FeedViewPresenter {
     var loadingView: FeedLoadingView
     var feedView: FeedView
     
+    static var title: String {
+        return NSLocalizedString("FEED_VIEW_TITLE",
+                                 tableName: "Feed",
+                                 bundle: Bundle(for: FeedViewPresenter.self), comment: "")
+    }
+    
     public init(loadingView: FeedLoadingView, feedView: FeedView) {
         self.loadingView = loadingView
         self.feedView = feedView
