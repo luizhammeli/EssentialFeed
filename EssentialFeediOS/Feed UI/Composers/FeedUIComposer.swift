@@ -12,7 +12,7 @@ public final class FeedUIComposer {
     private init() {}
     
     public static func feedCompose(with feedLoader: FeedLoader, imageLoader: FeedImageDataLoader) -> FeedViewController {
-        let presentationAdapter = FeedLoaderPresentationAdapter(feedLoader: feedLoader)
+        let presentationAdapter = FeedLoaderPresentationAdapter(feedLoader: MainQueueDispatchDecorator(instance: feedLoader))
         let feedRefreshController = FeedRefreshViewController(delegate: presentationAdapter)
         
         let feedViewController = FeedViewController.makeWith(refreshController: feedRefreshController,
@@ -38,6 +38,31 @@ extension FeedViewController {
     }
 }
 
+private final class MainQueueDispatchDecorator<T> {
+    let instance: T
+    
+    init(instance: T) {
+        self.instance = instance
+    }
+    
+    private func dispatch(completion: @escaping () -> Void) {
+        guard !Thread.isMainThread else { return completion() }
+
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
+}
+
+extension MainQueueDispatchDecorator: FeedLoader where T == FeedLoader {
+    func load(completion: @escaping (FeedLoader.Result) -> Void) {
+        instance.load { [weak self] result in
+            self?.dispatch {
+                completion(result)
+            }
+        }
+    }
+}
 
 private final class WeakRefVirtualProxy<T: AnyObject> {
     private weak var instance: T?

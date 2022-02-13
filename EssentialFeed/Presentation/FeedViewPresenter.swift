@@ -1,19 +1,18 @@
 //
 //  FeedViewPresenter.swift
-//  EssentialFeediOS
+//  EssentialFeed
 //
-//  Created by Luiz Diniz Hammerli on 16/01/22.
+//  Created by Luiz Hammerli on 13/02/22.
 //
 
 import Foundation
-import EssentialFeed
 
 public struct FeedLoadingViewModel {
-    let isLoading: Bool
+    public let isLoading: Bool
 }
 
 public struct FeedViewModel {
-    let feedItem: [FeedImage]
+    public let feedItem: [FeedImage]
 }
 
 public protocol FeedLoadingView: AnyObject {
@@ -25,10 +24,10 @@ public protocol FeedView {
 }
 
 public final class FeedViewPresenter {
-    var loadingView: FeedLoadingView
-    var feedView: FeedView
+    let loadingView: FeedLoadingView
+    let feedView: FeedView
     
-    static var title: String {
+    public static var title: String {
         return NSLocalizedString("FEED_VIEW_TITLE",
                                  tableName: "Feed",
                                  bundle: Bundle(for: FeedViewPresenter.self), comment: "")
@@ -39,16 +38,16 @@ public final class FeedViewPresenter {
         self.feedView = feedView
     }
     
-    func didFinishLoadingFeed(feedItem: [FeedImage]) {
-        loadingView.display(viewModel: .init(isLoading: false))
-        feedView.display(viewModel: .init(feedItem: feedItem))
-    }
-    
-    func didStartLoadingFeed() {
+    public func didStartLoadingFeed() {
         loadingView.display(viewModel: .init(isLoading: true))
     }
     
-    func didLoadFeedWithError() {
+    public func didLoadFeedWithError() {
         loadingView.display(viewModel: .init(isLoading: false))
+    }
+    
+    public func didFinishLoadingFeed(feedItem: [FeedImage]) {
+        loadingView.display(viewModel: .init(isLoading: false))
+        feedView.display(viewModel: .init(feedItem: feedItem))
     }
 }

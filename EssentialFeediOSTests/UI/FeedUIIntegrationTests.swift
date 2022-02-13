@@ -228,6 +228,22 @@ final class FeedUIIntegrationTests: XCTestCase {
         loader.completeImageLoading(with: .success(anyImageData()), at: 0)
         XCTAssertNil(view?.feedImageView.image)
     }
+    
+    func test_loadCompletion_shouldDispatchFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        let feedImage = self.makeFeedImage()
+        
+        sut.loadViewIfNeeded()
+        
+        let exp = expectation(description: #function)
+        DispatchQueue.global().async {
+            loader.completeFeedLoader(with: .success([feedImage]))
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1)
+        XCTAssertEqual(0, sut.numberOfRenderedFeedViews)
+    }
 }
 
 // MARK: - Helpers
