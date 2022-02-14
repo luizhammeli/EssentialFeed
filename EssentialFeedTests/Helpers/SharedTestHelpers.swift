@@ -15,8 +15,8 @@ func anyNSError() -> NSError {
     return NSError(domain: "", code: 10, userInfo: [:])
 }
 
-func anyData() -> Data {
-    return Data("Test Case".utf8)
+func anyData(value: String = "Test Case") -> Data {
+    return Data(value.utf8)
 }
 
 func anyHttpURLResponse() -> HTTPURLResponse {
