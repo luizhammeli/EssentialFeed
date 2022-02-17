@@ -351,7 +351,6 @@
 		259209F52778850B00545388 /* EssentialFeediOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				3882276A27B04D4B0046E27C /* Presentation */,
 				253F990D27AC732100515A59 /* UI */,
 			);
 			path = EssentialFeediOSTests;
@@ -476,13 +475,6 @@
 				3882276D27B067090046E27C /* Extensions */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		3882276A27B04D4B0046E27C /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presentation;
 			sourceTree = "<group>";
 		};
 		3882276D27B067090046E27C /* Extensions */ = {
