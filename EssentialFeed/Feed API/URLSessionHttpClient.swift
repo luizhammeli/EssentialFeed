@@ -8,6 +8,18 @@
 import Foundation
 
 public final class URLSessionHttpClient: HttpClient {
+    private struct URLSessionHttpClientTask: HttpClientTask {
+        let task: URLSessionDataTask
+        
+        init(task: URLSessionDataTask) {
+            self.task = task
+        }
+        
+        func cancel() {
+            task.cancel()
+        }
+    }
+    
     let urlSession: URLSession
     
     public init(urlSession: URLSession = URLSession.shared) {
@@ -16,8 +28,9 @@ public final class URLSessionHttpClient: HttpClient {
     
     private struct UnexpectedValuesRepresentation: Error {}
     
-    public func get(from url: URL, completion: @escaping (HttpClient.Result) -> Void) {
-        urlSession.dataTask(with: url) { [weak self] data, response, error in
+    @discardableResult
+    public func get(from url: URL, completion: @escaping (HttpClient.Result) -> Void) -> HttpClientTask {
+       let task = urlSession.dataTask(with: url) { [weak self] data, response, error in
             guard self != nil else { return }
             if let error = error {
                 completion(.failure(error))
@@ -30,6 +43,8 @@ public final class URLSessionHttpClient: HttpClient {
             }
             
             completion(.success((data, response)))
-        }.resume()
+        }
+        task.resume()
+        return URLSessionHttpClientTask(task: task)
     }
 }

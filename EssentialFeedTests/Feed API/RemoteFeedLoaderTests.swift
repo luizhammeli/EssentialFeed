@@ -136,14 +136,31 @@ private extension RemoteFeedLoaderTests {
 }
 
 final class HttpClientSpy: HttpClient {
+    struct HttpClientTaskSpy: HttpClientTask{
+        let completion: (() -> Void)
+        
+        init(completion: @escaping () -> Void) {
+            self.completion = completion
+        }
+        
+        func cancel() {
+            completion()
+        }
+    }
     private var messages: [(url: URL, completions: (HttpClient.Result) -> Void)] = []
     
     var requestedURLS: [URL] {
         return messages.map { $0.url }
     }
     
-    func get(from url: URL, completion: @escaping (HttpClient.Result) -> Void) {
+    var canceledURLS = [URL]()
+    
+    @discardableResult
+    func get(from url: URL, completion: @escaping (HttpClient.Result) -> Void) -> HttpClientTask {
         messages.append((url, completion))
+        return HttpClientTaskSpy { [weak self] in
+            self?.canceledURLS.append(url)
+        }
     }
     
     func complete(with error: Error, index: Int = 0) {
