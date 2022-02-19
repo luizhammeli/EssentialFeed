@@ -32,11 +32,8 @@ public final class URLSessionHttpClient: HttpClient {
     public func get(from url: URL, completion: @escaping (HttpClient.Result) -> Void) -> HttpClientTask {
        let task = urlSession.dataTask(with: url) { [weak self] data, response, error in
             guard self != nil else { return }
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
+            if let error = error { return completion(.failure(error)) }
+           
             guard let response = response as? HTTPURLResponse, let data = data else {
                 completion(.failure(UnexpectedValuesRepresentation()))
                 return

@@ -108,6 +108,7 @@ Description Description Description Description Description Descriptio</string>
                                     <outlet property="feedImageContainer" destination="pXD-8U-EnH" id="ZIm-qg-dcX"/>
                                     <outlet property="feedImageView" destination="2WL-Mm-zcr" id="3Hu-LG-8ma"/>
                                     <outlet property="locationLabel" destination="EmQ-j3-1t3" id="nnP-da-rU2"/>
+                                    <outlet property="locationLabelsContainer" destination="oC4-5k-HBb" id="iM7-8K-QpA"/>
                                     <outlet property="retryButton" destination="CNY-Zi-QTc" id="dnG-K9-dy6"/>
                                 </connections>
                             </tableViewCell>

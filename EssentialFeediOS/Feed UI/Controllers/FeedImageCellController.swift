@@ -44,7 +44,7 @@ extension FeedImageCellController: FeedImageView {
     typealias Image = UIImage
     
     func display(model: FeedCellViewModel<UIImage>) {
-        cell?.locationLabel.isHidden = model.locationIsHidden
+        cell?.locationLabelsContainer.isHidden = model.locationIsHidden
         cell?.locationLabel.text = model.location
         cell?.descriptionLabel.text = model.description
         cell?.onRetry = delegate.didRequestImage
@@ -52,9 +52,9 @@ extension FeedImageCellController: FeedImageView {
         cell?.retryButton.isHidden = !model.shouldRetry
         
         if model.isLoading {
-            cell?.feedImageContainer.startShimmering()
+            cell?.feedImageView.startShimmering()
         } else {
-            cell?.feedImageContainer.stopShimmering()
+            cell?.feedImageView.stopShimmering()
         }
     }
 }

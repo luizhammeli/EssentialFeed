@@ -8,6 +8,7 @@
 import UIKit
 
 public final class FeedImageCell: UITableViewCell {
+    @IBOutlet public weak var locationLabelsContainer: UIStackView!
     @IBOutlet public weak var descriptionLabel: UILabel!
     @IBOutlet public weak var locationLabel: UILabel!
     @IBOutlet public weak var feedImageView: UIImageView!
