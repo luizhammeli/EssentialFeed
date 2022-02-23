@@ -12,7 +12,7 @@ import XCTest
 protocol FeedLoaderFallbackTestCase: XCTestCase {}
 
 extension FeedLoaderFallbackTestCase {
-    func expect(sut: FeedLoaderWithFallbackComposite,
+    func expect(sut: FeedLoader,
                 with expectedResult: FeedLoader.Result,
                 when action: () -> Void,
                 file: StaticString = #filePath,

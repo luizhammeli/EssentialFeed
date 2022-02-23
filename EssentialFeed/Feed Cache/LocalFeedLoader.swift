@@ -7,8 +7,7 @@
 
 import Foundation
 
-public final class LocalFeedLoader {
-    public typealias SaveResult = Error?
+public final class LocalFeedLoader {    
     private let store: FeedStore
     private let currentDate: () -> Date
     
@@ -19,7 +18,7 @@ public final class LocalFeedLoader {
 }
 
 // MARK: - Save
-extension LocalFeedLoader {
+extension LocalFeedLoader: FeedCache {
     public func save(images: [FeedImage], completion: @escaping (SaveResult) -> Void) {
         store.deleteCachedItems() { [weak self] error in
             guard let self = self else { return }
