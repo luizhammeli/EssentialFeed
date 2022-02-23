@@ -178,6 +178,38 @@
             endingLineNumber = "48"
             landmarkName = "deleteCachedItems(completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9B0F3ECB-54F1-4E6A-BDB7-E704DB90D494 - a4c0483bffb77840"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in EssentialFeed.CodableFeedStore.deleteCachedItems(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "EssentialFeed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeed/Feed%20Cache/CodableFeedStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "144">
+               </Location>
+               <Location
+                  uuid = "9B0F3ECB-54F1-4E6A-BDB7-E704DB90D494 - a4c0483bffb77840"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in EssentialFeed.CodableFeedStore.deleteCachedItems(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "EssentialFeed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeed/Feed%20Cache/CodableFeedStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "180">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -194,6 +226,38 @@
             endingLineNumber = "46"
             landmarkName = "deleteCachedItems(completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B5ED9F75-8DEE-4E1B-9803-073146156110 - 5cd641fa5f40d913"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeed.CodableFeedStore.deleteCachedItems(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "EssentialFeed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeed/Feed%20Cache/CodableFeedStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "388">
+               </Location>
+               <Location
+                  uuid = "B5ED9F75-8DEE-4E1B-9803-073146156110 - 5cd641fa5f40d913"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeed.CodableFeedStore.deleteCachedItems(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "EssentialFeed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeed/Feed%20Cache/CodableFeedStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "404">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -210,6 +274,38 @@
             endingLineNumber = "49"
             landmarkName = "deleteCachedItems(completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "32783C39-3E14-46E9-B0AC-D2FE4231095F - a4c0483bffb7778e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in EssentialFeed.CodableFeedStore.deleteCachedItems(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "EssentialFeed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeed/Feed%20Cache/CodableFeedStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "312">
+               </Location>
+               <Location
+                  uuid = "32783C39-3E14-46E9-B0AC-D2FE4231095F - a4c0483bffb7778e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in EssentialFeed.CodableFeedStore.deleteCachedItems(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "EssentialFeed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeed/Feed%20Cache/CodableFeedStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "348">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -353,6 +449,21 @@
                   endingLineNumber = "44"
                   offsetFromSymbolStart = "632">
                </Location>
+               <Location
+                  uuid = "CADD7C14-E5AF-4F7B-8DD3-402B65B01D4F - 5f590d3edcb8899f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOS.FeedImageCellController.display(model: EssentialFeediOS.FeedCellViewModel&lt;__C.UIImage&gt;) -&gt; ()"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOS/Feed%20UI/Controllers/FeedImageCellController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "468">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -401,6 +512,21 @@
                   endingLineNumber = "43"
                   offsetFromSymbolStart = "200">
                </Location>
+               <Location
+                  uuid = "5D110FF8-E40D-4AEB-AAF4-3CD81790E6B5 - 5f590d3edcb889fe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOS.FeedImageCellController.display(model: EssentialFeediOS.FeedCellViewModel&lt;__C.UIImage&gt;) -&gt; ()"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luizdinizhammerli/GitHub/EssentialFeed/EssentialFeediOS/Feed%20UI/Controllers/FeedImageCellController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "88">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -448,7 +574,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
             endingLineNumber = "21"
-            landmarkName = "loadFeedImageData(from:completion:)"
+            landmarkName = "test_load_requestDataFromCorrectURl()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -464,7 +590,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "24"
             endingLineNumber = "24"
-            landmarkName = "loadFeedImageData(from:completion:)"
+            landmarkName = "test_load_requestDataFromCorrectURl()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -480,7 +606,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
             endingLineNumber = "30"
-            landmarkName = "loadFeedImageData(from:completion:)"
+            landmarkName = "test_loadTwice_requestsDataFromURlTwice()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -496,7 +622,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
             endingLineNumber = "22"
-            landmarkName = "loadFeedImageData(from:completion:)"
+            landmarkName = "test_load_requestDataFromCorrectURl()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
