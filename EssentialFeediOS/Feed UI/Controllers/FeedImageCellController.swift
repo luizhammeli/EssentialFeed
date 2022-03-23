@@ -52,9 +52,15 @@ extension FeedImageCellController: FeedImageView {
         cell?.retryButton.isHidden = !model.shouldRetry
         
         if model.isLoading {
+            self.cell?.feedImageView.alpha = 0
             cell?.feedImageView.startShimmering()
         } else {
             cell?.feedImageView.stopShimmering()
+            if model.image != nil {
+                UIView.animate(withDuration: 0.25) {
+                    self.cell?.feedImageView.alpha = 1
+                }
+            }
         }
     }
 }

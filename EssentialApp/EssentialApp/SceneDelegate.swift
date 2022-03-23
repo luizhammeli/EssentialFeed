@@ -16,8 +16,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let client = URLSessionHttpClient(urlSession: .shared)
+        let localCacheUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
         let url = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
-        let controller = FeedUIComposer.feedCompose(with: RemoteFeedLoader(url: url, client: client), imageLoader: RemoteFeedImageDataLoader(client: client))
+        let feedLoader = FeedLoaderWithFallbackComposite(primary: RemoteFeedLoader(url: url, client: client),
+                                                         fallback: LocalFeedLoader(store: CodableFeedStore(storeURL: localCacheUrl), currentDate: Date.init))
+        let controller = FeedUIComposer.feedCompose(with: feedLoader,
+                                                    imageLoader: RemoteFeedImageDataLoader(client: client))
         window = UIWindow(windowScene: scene)
         window?.rootViewController = controller
         window?.makeKeyAndVisible()

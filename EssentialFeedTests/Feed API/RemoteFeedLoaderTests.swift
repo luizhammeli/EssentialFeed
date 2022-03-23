@@ -117,7 +117,7 @@ private extension RemoteFeedLoaderTests {
         wait(for: [expectation], timeout: 1)
     }
     
-    private func makeFeedImage(id: UUID, url: URL, description: String? = nil, location: String? = nil) -> (FeedImage, [String: Any]){
+    private func makeFeedImage(id: UUID, url: URL, description: String? = nil, location: String? = nil) -> (FeedImage, [String: Any]) {
         let feedImage = FeedImage(id: id, url: url, description: description, location: location)
         let feedItemJson = ["id": id.uuidString, "image": url.description, "location": location, "description": description].reduce(into: [String: Any]()) { partialResult, item in
             if let value = item.value { partialResult[item.key] = value }
