@@ -14,6 +14,7 @@ public final class FeedImageCell: UITableViewCell {
     @IBOutlet public weak var feedImageView: UIImageView!
     @IBOutlet public weak var feedImageContainer: UIView!
     @IBOutlet public weak var retryButton: UIButton!
+    @IBOutlet public weak var activityIndicator: UIActivityIndicatorView!
     
     @IBAction private func didPressRetryButton() {
         onRetry?()

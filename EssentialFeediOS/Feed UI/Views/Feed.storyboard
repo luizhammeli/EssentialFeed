@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RP3-jD-NOB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RP3-jD-NOB">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,6 +23,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="590"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="WcW-3f-J6A">
+                                            <rect key="frame" x="197" y="285" width="20" height="20"/>
+                                        </activityIndicatorView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Nl2-23-dFp">
                                             <rect key="frame" x="20" y="11" width="374" height="568"/>
                                             <subviews>
@@ -92,7 +95,9 @@ Description Description Description Description Description Descriptio</string>
                                         <constraint firstItem="CNY-Zi-QTc" firstAttribute="bottom" secondItem="2WL-Mm-zcr" secondAttribute="bottom" id="1gO-JZ-CoM"/>
                                         <constraint firstItem="CNY-Zi-QTc" firstAttribute="trailing" secondItem="2WL-Mm-zcr" secondAttribute="trailing" id="4kR-Ud-BVz"/>
                                         <constraint firstItem="Nl2-23-dFp" firstAttribute="top" secondItem="qGF-jJ-6bQ" secondAttribute="topMargin" id="CZV-44-ujf"/>
+                                        <constraint firstItem="WcW-3f-J6A" firstAttribute="centerY" secondItem="qGF-jJ-6bQ" secondAttribute="centerY" id="EeL-3N-oYN"/>
                                         <constraint firstItem="CNY-Zi-QTc" firstAttribute="leading" secondItem="2WL-Mm-zcr" secondAttribute="leading" id="LTr-E2-U0O"/>
+                                        <constraint firstItem="WcW-3f-J6A" firstAttribute="centerX" secondItem="qGF-jJ-6bQ" secondAttribute="centerX" id="Qyq-Ud-nR1"/>
                                         <constraint firstItem="pXD-8U-EnH" firstAttribute="leading" secondItem="2WL-Mm-zcr" secondAttribute="leading" id="ckk-HM-ghV"/>
                                         <constraint firstItem="CNY-Zi-QTc" firstAttribute="top" secondItem="2WL-Mm-zcr" secondAttribute="top" id="hen-ku-7Ya"/>
                                         <constraint firstItem="Nl2-23-dFp" firstAttribute="leading" secondItem="qGF-jJ-6bQ" secondAttribute="leadingMargin" id="jBR-Sl-yrk"/>
@@ -104,6 +109,7 @@ Description Description Description Description Description Descriptio</string>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="WcW-3f-J6A" id="3QA-je-Pao"/>
                                     <outlet property="descriptionLabel" destination="Tp3-N5-GWA" id="4H5-je-VnC"/>
                                     <outlet property="feedImageContainer" destination="pXD-8U-EnH" id="ZIm-qg-dcX"/>
                                     <outlet property="feedImageView" destination="2WL-Mm-zcr" id="3Hu-LG-8ma"/>

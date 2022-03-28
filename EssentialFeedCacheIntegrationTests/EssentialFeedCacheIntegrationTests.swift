@@ -9,7 +9,7 @@ import XCTest
 import EssentialFeed
 
 final class EssentialFeedCacheIntegrationTests: XCTestCase {
-    private let fileName = "\(type(of: self))"
+    private let fileName = "\(type(of: EssentialFeedCacheIntegrationTests.self))"
     
     override func setUp() {
         super.setUp()

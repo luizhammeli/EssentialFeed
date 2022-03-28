@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		256BBE6327ECF54200E37D4C /* FeedLoaderCompositeDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256BBE6227ECF54200E37D4C /* FeedLoaderCompositeDecorator.swift */; };
 		3802D8CE27C0A23C00A3D3D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3802D8CD27C0A23C00A3D3D0 /* AppDelegate.swift */; };
 		3802D8D027C0A23C00A3D3D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3802D8CF27C0A23C00A3D3D0 /* SceneDelegate.swift */; };
 		3802D8D727C0A23D00A3D3D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3802D8D627C0A23D00A3D3D0 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		256BBE6227ECF54200E37D4C /* FeedLoaderCompositeDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderCompositeDecorator.swift; sourceTree = "<group>"; };
 		3802D8CA27C0A23C00A3D3D0 /* EssentialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EssentialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3802D8CD27C0A23C00A3D3D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3802D8CF27C0A23C00A3D3D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		3802D8CC27C0A23C00A3D3D0 /* EssentialApp */ = {
 			isa = PBXGroup;
 			children = (
+				256BBE6227ECF54200E37D4C /* FeedLoaderCompositeDecorator.swift */,
 				3804F5A427C2BEDE009A6CE6 /* FeedLoaderWithFallbackComposite.swift */,
 				3802D8CD27C0A23C00A3D3D0 /* AppDelegate.swift */,
 				3802D8CF27C0A23C00A3D3D0 /* SceneDelegate.swift */,
@@ -253,6 +256,7 @@
 			files = (
 				3802D8CE27C0A23C00A3D3D0 /* AppDelegate.swift in Sources */,
 				3804F5A527C2BEDE009A6CE6 /* FeedLoaderWithFallbackComposite.swift in Sources */,
+				256BBE6327ECF54200E37D4C /* FeedLoaderCompositeDecorator.swift in Sources */,
 				3802D8D027C0A23C00A3D3D0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

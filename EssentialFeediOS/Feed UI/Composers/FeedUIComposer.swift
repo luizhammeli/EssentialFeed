@@ -105,7 +105,7 @@ final class FeedViewAdapter {
     }
     
     func adaptToCellControllers(feedImage: [FeedImage]) {
-        controller?.tableModel = feedImage.map {
+        self.controller?.tableModel = feedImage.map {
             let adapter = FeedImageCellPresentationAdapter<WeakRefVirtualProxy<FeedImageCellController>, UIImage>(model: $0, imageLoader: imageLoader)
             let controller = FeedImageCellController(delegate: adapter)
             adapter.presenter = FeedImageCellPresenter(view: WeakRefVirtualProxy(instance: controller), imageTransformer: UIImage.init)

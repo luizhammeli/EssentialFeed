@@ -337,7 +337,7 @@ private extension FeedViewController {
 
 private extension FeedImageCell {
     var isShowingLocation: Bool {
-        !locationLabel.isHidden
+        !(locationLabel.text?.isEmpty ?? true)
     }
     
     var descriptionText: String? {
@@ -349,7 +349,7 @@ private extension FeedImageCell {
     }
     
     var isShowingLoadingIndicator: Bool {
-        feedImageContainer.isShimmering
+        activityIndicator.isAnimating
     }
     
     var feedImageData: Data? {
