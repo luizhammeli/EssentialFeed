@@ -383,6 +383,12 @@ private extension UIButton {
      }
  }
 
+private extension UIView {
+     func simulateGesture() {
+         (self.target(forAction: Selector("handleButton"), withSender: self) as! NSObject).perform(Selector("handleButton"))
+     }
+ }
+
 private extension UIImage {
      static func make(withColor color: UIColor) -> UIImage {
          let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
