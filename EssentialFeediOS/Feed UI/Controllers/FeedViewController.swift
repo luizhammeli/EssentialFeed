@@ -15,11 +15,11 @@ public final class FeedViewController: UITableViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        setupRefreshControl()        
+        tableView.refreshControl = feedRefreshController?.view
     }
     
-    private func setupRefreshControl() {
-        tableView.refreshControl = feedRefreshController?.view
+    public override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
         feedRefreshController?.refresh()
     }
     

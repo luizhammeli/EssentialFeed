@@ -19,7 +19,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_loadActions_loadsFeed() {
         let (sut, loader) = makeSUT()
 
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         XCTAssertEqual(loader.loadCompletionMessagesCount, 1)
         
         sut.simulateUserInitiatedFeedReload()
@@ -32,7 +32,9 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_loadingIndicator_isVisibleWhileLoadingFeed() {
         let (sut, loader) = makeSUT()
         
-        sut.loadViewIfNeeded()
+        sut.setupFakeRefreshControl()
+        sut.simulateAppearanceTransition()
+        
         XCTAssertTrue(sut.isShowingLoadingIndicator)
         
         loader.completeFeedLoader(at: 0)
@@ -40,7 +42,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         
         sut.simulateUserInitiatedFeedReload()
         XCTAssertTrue(sut.isShowingLoadingIndicator)
-        
+
         loader.completeFeedLoader(with: .failure(anyNSError()), at: 1)
         XCTAssertFalse(sut.isShowingLoadingIndicator)
     }
@@ -53,7 +55,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image1 = makeFeedImage(location: nil, description: nil)
         let image2 = makeFeedImage(location: "Location 2", description: "Description 2")
         
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         loader.completeFeedLoader(with: .success([image0]))
         assertThat(sut: sut, isRendering: [image0])
                 
@@ -67,7 +69,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         
         let image0 = makeFeedImage(location: "Location 1", description: "Description 1")
         
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         loader.completeFeedLoader(with: .success([image0]))
         assertThat(sut: sut, isRendering: [image0])
                 
@@ -84,7 +86,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image0 = makeFeedImage(location: nil, description: nil, url: url0)
         let image1 = makeFeedImage(location: nil, description: nil, url: url1)
         
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         loader.completeFeedLoader(with: .success([image0, image1]))
         sut.feedImageView(at: 0)
         
@@ -100,7 +102,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image0 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image0.com")!)
         let image1 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image1.com")!)
         
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         loader.completeFeedLoader(with: .success([image0, image1]))
         XCTAssertEqual(loader.canceledTasks, [])
         
@@ -117,7 +119,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image0 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image0.com")!)
         let image1 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image1.com")!)
         
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         loader.completeFeedLoader(with: .success([image0, image1]))
         
         let view = sut.simulateImageViewVisible(at: 0)
@@ -142,7 +144,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let imageData0 = UIImage.make(withColor: .red).pngData()!
         let imageData1 = UIImage.make(withColor: .blue).pngData()!
         
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         loader.completeFeedLoader(with: .success([image0, image1]))
         
         let view = sut.simulateImageViewVisible(at: 0)
@@ -157,7 +159,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_feedImageViewRetryButton_isVisibleOnImageURLLoadError() {
         let (sut, loader) = makeSUT()
         
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         loader.completeFeedLoader(with: .success([makeFeedImage(), makeFeedImage()]))
         
         let view = sut.simulateImageViewVisible(at: 0)
@@ -176,7 +178,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_feedImageViewRetryButton_isVisibleOnInvalidLoadedImageData() {
         let (sut, loader) = makeSUT()
         
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         loader.completeFeedLoader(with: .success([makeFeedImage(), makeFeedImage()]))
         
         let view = sut.simulateImageViewVisible(at: 0)
@@ -198,7 +200,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image0 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image0.com")!)
         let image1 = makeFeedImage(location: nil, description: nil, url: URL(string: "http://image1.com")!)
         
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         loader.completeFeedLoader(with: .success([image0, image1]))
         
         let view = sut.simulateImageViewVisible(at: 0)
@@ -219,7 +221,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_() {
         let (sut, loader) = makeSUT()
         
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         loader.completeFeedLoader(with: .success([makeFeedImage()]))
         
         sut.simulateImageViewVisible(at: 0)
@@ -233,7 +235,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let (sut, loader) = makeSUT()
         let feedImage = self.makeFeedImage()
         
-        sut.loadViewIfNeeded()
+        sut.simulateAppearanceTransition()
         
         let exp = expectation(description: #function)
         DispatchQueue.global().async {
@@ -300,6 +302,23 @@ private extension FeedUIIntegrationTests {
 }
 
 private extension FeedViewController {
+    func simulateAppearanceTransition() {
+        beginAppearanceTransition(true, animated: false)
+        endAppearanceTransition()
+    }
+    
+    func setupFakeRefreshControl() {
+        let fakeRefreshControl = FakeRefreshControl()
+        refreshControl?.allTargets.forEach { target in
+            refreshControl?.actions(forTarget: target, forControlEvent: .valueChanged)?.forEach {
+                action in
+                fakeRefreshControl.addTarget(target, action: Selector(action), for: .valueChanged)
+            }
+        }
+        feedRefreshController?.view = fakeRefreshControl
+        refreshControl = fakeRefreshControl
+    }
+    
     func simulateUserInitiatedFeedReload() {
         refreshControl?.simulatePullToRefresh()
     }
@@ -401,3 +420,17 @@ private extension UIImage {
          return img!
      }
  }
+
+final class FakeRefreshControl: UIRefreshControl {
+    private var _isRefreshing: Bool = false
+    
+    override var isRefreshing: Bool { _isRefreshing }
+
+    override func beginRefreshing() {
+        _isRefreshing = true
+    }
+    
+    override func endRefreshing() {
+        _isRefreshing = false
+    }
+}
